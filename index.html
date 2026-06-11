@@ -643,7 +643,7 @@
       const dh = img.height * scale;
       const dx = (SIZE - dw) / 2;
       const isPortrait = img.height > img.width;
-      const yBias = isPortrait ? 0.08 : 0.5; // 0=top, .5=center
+      const yBias = isPortrait ? 0.30 : 0.5; // higher = face sits higher in the canvas
       const dy = (SIZE - dh) * yBias;
       octx.drawImage(img, dx, dy, dw, dh);
       const pixels = octx.getImageData(0, 0, SIZE, SIZE).data;

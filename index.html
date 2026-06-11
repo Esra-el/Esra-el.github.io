@@ -11,16 +11,16 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   :root {
-    --bg:        #fafaf8;
-    --bg-soft:   #f3f1ed;
-    --line:      #e2dfd9;
-    --line-soft: #d1cec7;
-    --text:      #1a1a1a;
-    --text-soft: #2e2e2e;
-    --muted:     #6e6e6e;
-    --accent:    #1a1a1a;
+    --bg:        #0a0a0a;
+    --bg-soft:   #141414;
+    --line:      #232323;
+    --line-soft: #2e2e2e;
+    --text:      #f0f0f0;
+    --text-soft: #c4c4c4;
+    --muted:     #7a7a7a;
+    --accent:    #f5f5f5;
   }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; background: var(--bg); }
   body {
     margin: 0;
     font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
@@ -31,15 +31,25 @@
     -webkit-font-smoothing: antialiased;
   }
   a { color: var(--text); text-decoration: none; transition: opacity .2s; }
-  a:hover { opacity: .55; }
+  a:hover { opacity: .65; }
   .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
-  ::selection { background: #1a1a1a; color: var(--bg); }
+  ::selection { background: var(--text); color: var(--bg); }
+
+  /* ── Subtle grain overlay over the whole page ──────────────── */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.04;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
 
   /* ── Top nav ────────────────────────────────────────────────── */
   nav.top {
     position: sticky; top: 0; z-index: 50;
     backdrop-filter: blur(12px);
-    background: rgba(250, 250, 248, 0.85);
+    background: rgba(10, 10, 10, 0.78);
     border-bottom: 1px solid var(--line);
     padding: 14px 0;
   }
@@ -71,61 +81,49 @@
 
   /* ── Hero ───────────────────────────────────────────────────── */
   .hero {
-    padding: 100px 0 90px 0;
+    padding: 110px 0 100px 0;
     border-bottom: 1px solid var(--line);
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 300px 1fr;
     gap: 80px;
     align-items: center;
   }
   .avatar-wrap {
     width: 300px; height: 300px;
     display: flex; align-items: center; justify-content: center;
-    position: relative;
     perspective: 800px;
   }
   .avatar-circle {
     width: 300px; height: 300px;
     border-radius: 50%;
     overflow: hidden;
-    background: #0a0a0a;
-    box-shadow: 0 14px 50px rgba(20, 20, 20, 0.18);
+    background: #000;
+    box-shadow: 0 14px 60px rgba(0, 0, 0, 0.6);
     transition: transform .35s ease, box-shadow .35s ease;
-    cursor: pointer;
     transform-style: preserve-3d;
-  }
-  .avatar-circle:hover {
-    box-shadow: 0 22px 70px rgba(20, 20, 20, 0.28);
+    will-change: transform;
   }
   .avatar-circle img {
     width: 100%; height: 100%;
     object-fit: cover;
-    object-position: center 35%;
+    object-position: 65% 30%;
     display: block;
-    transition: transform .6s ease;
+    transition: transform .6s ease, filter .6s ease;
   }
-  .avatar-circle:hover img { transform: scale(1.04); }
-  .avatar-caption {
-    margin-top: 14px;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    color: var(--muted);
-    text-align: center;
-    letter-spacing: 0.5px;
-  }
+  .avatar-circle:hover img { transform: scale(1.04); filter: saturate(1.15); }
+
   .hero-text h1 {
     font-family: "JetBrains Mono", monospace;
-    font-size: 48px; font-weight: 300;
+    font-size: 50px; font-weight: 400;
     margin: 0 0 24px 0;
     letter-spacing: -1px;
     line-height: 1.1;
+    color: var(--text);
+    cursor: default;
   }
   .hero-text h1 .you {
+    color: var(--accent);
     font-weight: 600;
-    background: linear-gradient(90deg, #1a1a1a 0%, #6e6e6e 100%);
-    -webkit-background-clip: text;
-            background-clip: text;
-    -webkit-text-fill-color: transparent;
   }
   .hero-text p {
     margin: 0 0 32px 0;
@@ -134,7 +132,7 @@
     line-height: 1.75;
     max-width: 560px;
   }
-  .hero-text p strong { color: var(--text); font-weight: 600; }
+  .hero-text p strong { color: var(--accent); font-weight: 600; }
   .cta {
     display: inline-flex; align-items: center; gap: 10px;
     padding: 13px 24px;
@@ -177,11 +175,11 @@
   .about-photo img {
     width: 100%; height: 100%;
     object-fit: cover;
-    filter: grayscale(60%) contrast(1.04);
+    filter: grayscale(40%) contrast(1.04) brightness(0.95);
     transition: filter .5s;
     display: block;
   }
-  .about-photo:hover img { filter: grayscale(0%); }
+  .about-photo:hover img { filter: grayscale(0%) contrast(1.04) brightness(1); }
 
   /* ── Experience ─────────────────────────────────────────────── */
   .exp {
@@ -226,7 +224,7 @@
   .featured:hover { border-color: var(--text); }
   .featured-image {
     width: 100%; height: 300px;
-    background: linear-gradient(135deg, #ece9e3 0%, #d9d6cf 100%);
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
     display: flex; align-items: center; justify-content: center;
     color: var(--muted);
     font-family: "JetBrains Mono", monospace;
@@ -268,7 +266,7 @@
   }
   .card:hover { border-color: var(--text); transform: translateY(-3px); }
   .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-  .card-folder { font-size: 22px; }
+  .card-folder { font-size: 22px; color: var(--text); }
   .card-links { display: flex; gap: 10px; font-size: 13px; }
   .card-links a { color: var(--muted); }
   .card h4 { margin: 0 0 8px 0; font-size: 16px; font-weight: 600; }
@@ -294,11 +292,11 @@
     position: relative;
     overflow: hidden;
     background: #000;
-    border-radius: 4px;
-    box-shadow: 0 6px 30px rgba(0,0,0,0.10);
+    border-radius: 6px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
     transition: transform .4s ease, box-shadow .4s ease;
   }
-  .art-piece:hover { transform: scale(1.015); box-shadow: 0 14px 50px rgba(0,0,0,0.18); }
+  .art-piece:hover { transform: scale(1.015); box-shadow: 0 18px 60px rgba(0,0,0,0.7); }
   .art-piece img {
     width: 100%; height: auto;
     display: block;
@@ -331,7 +329,7 @@
   .skill-value { color: var(--text-soft); }
   .skill-value strong { color: var(--text); font-weight: 600; }
 
-  /* ── Contact / footer ───────────────────────────────────────── */
+  /* ── Contact ────────────────────────────────────────────────── */
   .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -406,11 +404,11 @@
     <section class="hero" id="home">
       <div class="avatar-wrap">
         <div class="avatar-circle" id="avatar-circle">
-          <img src="art/koi.jpg" alt="Detail from oil painting — koi yin & yang">
+          <img src="hero-flowers.jpg" alt="Esra in a colorful garden of azaleas">
         </div>
       </div>
       <div class="hero-text">
-        <h1>hi, <span class="you">esra</span> here.</h1>
+        <h1 id="glitch-h1">hi, <span class="you" id="glitch-name">esra</span> here.</h1>
         <p>
           Computer Science student at the University of Florence and software-engineering intern at <strong>Chequo</strong>. I ship production code on a multi-tenant SaaS by day, and paint with oil at night. Occasionally both happen at the same time.
         </p>
@@ -466,7 +464,6 @@
     <section id="projects">
       <h2 class="h2"><span class="slash">/</span> projects</h2>
 
-      <!-- Featured -->
       <div class="featured">
         <div class="featured-image">
           BookLink — screenshot coming soon
@@ -491,7 +488,6 @@
         </div>
       </div>
 
-      <!-- Other projects -->
       <div class="cards">
 
         <div class="card">
@@ -612,25 +608,76 @@
   </footer>
 
 <script>
-  // ── Subtle parallax tilt on the koi avatar following the mouse ──
+  // ── 1. Subtle 3D parallax tilt on the hero avatar ──────────────
   (function() {
     const circle = document.getElementById('avatar-circle');
     if (!circle) return;
     const wrap = circle.parentElement;
-    const MAX = 10; // degrees of tilt
-
+    const MAX = 8;
     wrap.addEventListener('mousemove', (e) => {
       const rect = wrap.getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
       const dx = (e.clientX - cx) / (rect.width / 2);
       const dy = (e.clientY - cy) / (rect.height / 2);
-      const rx = -dy * MAX;
-      const ry =  dx * MAX;
-      circle.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) scale(1.02)`;
+      circle.style.transform = `rotateX(${-dy * MAX}deg) rotateY(${dx * MAX}deg) scale(1.02)`;
     });
-    wrap.addEventListener('mouseleave', () => {
-      circle.style.transform = '';
+    wrap.addEventListener('mouseleave', () => { circle.style.transform = ''; });
+  })();
+
+  // ── 2. Glitch text reveal on the hero heading ──────────────────
+  (function() {
+    const SCRAMBLE = '!@#$%^&*<>{}[]/?abcdefghijklmnopqrstuvwxyz0123456789';
+    const h1 = document.getElementById('glitch-h1');
+    if (!h1) return;
+    // Save the original innerHTML so the colored span is preserved
+    const originalHTML = h1.innerHTML;
+
+    function scrambleOnce(plainTarget, duration, doneCallback) {
+      const start = performance.now();
+      const len = plainTarget.length;
+      const reveal = new Array(len).fill(false);
+      // schedule each character to "lock in" at its own time
+      const locks = plainTarget.split('').map(() => Math.random() * duration);
+
+      function frame(now) {
+        const t = now - start;
+        let out = '';
+        for (let i = 0; i < len; i++) {
+          const c = plainTarget[i];
+          if (c === ' ') { out += ' '; continue; }
+          if (t > locks[i]) { reveal[i] = true; }
+          if (reveal[i]) {
+            out += c;
+          } else {
+            out += SCRAMBLE[Math.floor(Math.random() * SCRAMBLE.length)];
+          }
+        }
+        h1.textContent = out;
+        if (t < duration) {
+          requestAnimationFrame(frame);
+        } else {
+          // restore the colored span
+          h1.innerHTML = originalHTML;
+          if (doneCallback) doneCallback();
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // initial reveal
+    const plainText = h1.textContent;
+    scrambleOnce(plainText, 1100);
+
+    // on hover, re-scramble briefly
+    let cooldown = false;
+    h1.addEventListener('mouseenter', () => {
+      if (cooldown) return;
+      cooldown = true;
+      const plain = h1.textContent;
+      scrambleOnce(plain, 700, () => {
+        setTimeout(() => { cooldown = false; }, 300);
+      });
     });
   })();
 </script>

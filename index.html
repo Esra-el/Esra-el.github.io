@@ -68,6 +68,14 @@
   main { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
   section { padding: 90px 0; border-bottom: 1px solid var(--line); }
   section:last-of-type { border-bottom: none; }
+  /* Bubble-up reveal — sections fade and float into view as you scroll */
+  section.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform .8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  section.reveal.in-view { opacity: 1; transform: translateY(0); }
   .h2 {
     font-family: "JetBrains Mono", monospace;
     font-size: 28px; font-weight: 500;
@@ -391,7 +399,8 @@
     .about-grid { grid-template-columns: 1fr; gap: 36px; }
     .about-photo { width: 100%; max-width: 320px; height: 380px; margin: 0 auto; }
     .cards { grid-template-columns: 1fr; }
-    .art-grid { grid-template-columns: 1fr; }
+    .art-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; gap: 22px; }
+    .art-piece img { display: block; }
     .contact-grid { grid-template-columns: 1fr; }
     .skills { grid-template-columns: 1fr; gap: 4px; }
     section { padding: 60px 0; }
@@ -741,7 +750,26 @@
     img.src = 'hero-source.jpg?v=7';
   })();
 
-  // ── 3. "Say hi!" button: try mailto + copy email to clipboard ──
+  // ── 3. Section bubble-up reveal on scroll ─────────────────────
+  (function() {
+    const sections = document.querySelectorAll('main > section');
+    sections.forEach(s => s.classList.add('reveal'));
+    if (!('IntersectionObserver' in window)) {
+      sections.forEach(s => s.classList.add('in-view'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    sections.forEach(s => io.observe(s));
+  })();
+
+  // ── 4. "Say hi!" button: try mailto + copy email to clipboard ──
   (function() {
     const btns = document.querySelectorAll('a[href^="mailto:"]');
     btns.forEach(btn => {

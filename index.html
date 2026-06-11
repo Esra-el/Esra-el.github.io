@@ -18,7 +18,7 @@
     --text:      #f0f0f0;
     --text-soft: #c4c4c4;
     --muted:     #7a7a7a;
-    --accent:    #f5f5f5;
+    --accent:    #7fd9a8;   /* mint-green — matches the shirt mood */
   }
   html { scroll-behavior: smooth; background: var(--bg); }
   body {
@@ -427,10 +427,10 @@
       <div class="about-grid">
         <div class="about-text">
           <p>
-            I'm a second-year Computer Science student at the University of Florence (<strong>UNIFI</strong>), currently contributing as a software-engineering intern at <a href="https://chequo.com" style="color:var(--text);border-bottom:1px solid var(--text);padding-bottom:1px">Chequo</a> — a cloud-native SaaS POS for European restaurants.
+            I'm a second-year Computer Science student at the University of Florence (<strong>UNIFI</strong>), currently contributing as a software-engineering intern at <a href="https://chequo.com" style="color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:1px">Chequo</a> — a cloud-native SaaS POS for European restaurants.
           </p>
           <p>
-            My core language is Java/OOP. At Chequo I work in TypeScript and React Native — <strong>Claude Code</strong> is my pair-programmer, so I can move fast in unfamiliar stacks while I make the architectural calls and own the review. The work is real (a draft PR with 24 commits, ~2,000 lines, conflict resolution across major framework upgrades).
+            I love building end-to-end: from a Prisma schema and REST endpoint, through React Native screens on a tablet, to the merge-conflict resolution that brings someone else's work into mine. My background is broad on purpose — I've shipped Java, TypeScript, SQL, and even raw RISC-V assembly.
           </p>
           <p>Here are some technologies I have been working with:</p>
           <div class="tech-list">
@@ -689,7 +689,7 @@
           d.y += (ty - d.y) * 0.16;
 
           const drift = Math.hypot(d.x - d.bx, d.y - d.by);
-          ctx.fillStyle = 'rgba(240, 240, 240, ' + Math.max(0.55, 0.95 - drift * 0.01) + ')';
+          ctx.fillStyle = 'rgba(127, 217, 168, ' + Math.max(0.55, 0.95 - drift * 0.01) + ')';
           ctx.beginPath();
           ctx.arc(d.x, d.y, d.r + drift * 0.025, 0, Math.PI * 2);
           ctx.fill();

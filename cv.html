@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esra Elareibi — Software Engineer</title>
+<meta name="description" content="Esra Elareibi — Computer Science student & software engineer, Florence. Backend, mobile, full-stack.">
+<style>
+  /* ── Reset & base ───────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
+    color: #1a1a1a;
+    line-height: 1.55;
+    background: #f8f7f3;
+    font-size: 14px;
+  }
+
+  /* ── Layout ─────────────────────────────────────────────── */
+  .page {
+    max-width: 820px;
+    margin: 32px auto;
+    padding: 48px 56px;
+    background: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05),
+                0 8px 32px rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+  }
+
+  /* ── Header ─────────────────────────────────────────────── */
+  header {
+    border-bottom: 2px solid #1a1a1a;
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+  }
+  h1 {
+    margin: 0 0 6px 0;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+  }
+  .tagline {
+    margin: 0 0 12px 0;
+    color: #555;
+    font-size: 15px;
+  }
+  .contact {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.8;
+  }
+  .contact a {
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1px dotted #999;
+    margin: 0 2px;
+  }
+  .contact a:hover { border-bottom-style: solid; color: #0048cc; }
+  .sep { color: #bbb; margin: 0 6px; }
+
+  /* ── Sections ───────────────────────────────────────────── */
+  section {
+    margin-top: 28px;
+    page-break-inside: avoid;
+  }
+  h2 {
+    margin: 0 0 14px 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #0048cc;
+  }
+  h3 {
+    margin: 0 0 4px 0;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .where {
+    color: #555;
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+  .when {
+    float: right;
+    color: #777;
+    font-size: 12px;
+    font-style: italic;
+  }
+  .summary {
+    margin: 0 0 8px 0;
+    color: #333;
+  }
+
+  /* ── Lists ──────────────────────────────────────────────── */
+  ul {
+    margin: 8px 0 0 0;
+    padding-left: 18px;
+  }
+  li {
+    margin-bottom: 4px;
+    color: #2a2a2a;
+  }
+  li strong { color: #0048cc; }
+
+  .entry {
+    margin-bottom: 18px;
+  }
+  .entry:last-child { margin-bottom: 0; }
+
+  /* ── Skills layout ──────────────────────────────────────── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 6px 16px;
+    font-size: 13px;
+  }
+  .skills-grid .label {
+    color: #555;
+    font-weight: 600;
+    text-align: right;
+  }
+  .skills-grid .value { color: #1a1a1a; }
+
+  .langs {
+    font-size: 13px;
+  }
+  .langs strong { color: #0048cc; }
+
+  /* ── Print styles ───────────────────────────────────────── */
+  @page {
+    size: A4;
+    margin: 12mm 14mm;
+  }
+  @media print {
+    body { background: white; font-size: 11pt; }
+    .page {
+      box-shadow: none;
+      max-width: none;
+      margin: 0;
+      padding: 0;
+      border-radius: 0;
+    }
+    h1 { font-size: 22pt; }
+    h2 { font-size: 10pt; }
+    h3 { font-size: 11pt; }
+    section { margin-top: 14pt; }
+    a { color: #1a1a1a; text-decoration: none; border-bottom: none; }
+    .contact a { border-bottom: none; }
+  }
+
+  /* ── Responsive ─────────────────────────────────────────── */
+  @media (max-width: 640px) {
+    .page { padding: 28px 22px; margin: 0; border-radius: 0; }
+    .when { float: none; display: block; margin-bottom: 4px; }
+    .skills-grid { grid-template-columns: 1fr; gap: 2px; }
+    .skills-grid .label { text-align: left; }
+    h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+  <main class="page">
+
+    <header>
+      <h1>Esra Elareibi</h1>
+      <p class="tagline">Computer Science student · Software engineer · Backend / mobile / full-stack</p>
+      <div class="contact">
+        Florence, Italy
+        <span class="sep">·</span>
+        <a href="tel:+393488453981">+39 348 845 3981</a>
+        <span class="sep">·</span>
+        <a href="mailto:esra.elareibi@yahoo.com">esra.elareibi@yahoo.com</a>
+        <br>
+        <a href="https://github.com/Esra-el">github.com/Esra-el</a>
+        <span class="sep">·</span>
+        <a href="https://linkedin.com/in/esra-elar-/">linkedin.com/in/esra-elar-</a>
+        <span class="sep">·</span>
+        <a href="https://esra-el.github.io"><strong>esra-el.github.io</strong></a>
+      </div>
+    </header>
+
+    <section>
+      <h2>Summary</h2>
+      <p class="summary">
+        Second-year Computer Science student at the University of Florence, currently shipping production code as an intern on a multi-tenant SaaS. Comfortable across <strong>backend</strong> (NestJS, Java/Spring Boot), <strong>web frontends</strong> (React, Next.js), and <strong>cross-platform mobile apps</strong> (React Native + Expo, iOS + Android). Strong fundamentals in REST APIs, JPA/Prisma, and relational database design.
+      </p>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      <div class="entry">
+        <h3>Software Engineering Intern <span class="when">2026 – Present</span></h3>
+        <div class="where"><a href="https://chequo.com">Chequo</a> · Nilson LLC — multi-tenant SaaS POS for restaurants</div>
+        <ul>
+          <li>Contributing to a multi-tenant cloud-native SaaS POS for European restaurants (TypeScript monorepo: <strong>NestJS</strong>, <strong>Next.js</strong>, <strong>React Native</strong>, <strong>Prisma</strong>, <strong>PostgreSQL</strong>).</li>
+          <li>Shipped the staff-app side of the <em>"join tables"</em> feature end-to-end — REST endpoints, Prisma schema additions, shared TypeScript types, and the React Native UI on the floor-plan screen. Open as draft PR (24 commits, ~2,000 lines).</li>
+          <li>Set up the staff-app <strong>iOS Simulator</strong> build pipeline (Expo prebuild + CocoaPods + native plugin patches) — the first iOS build on the project.</li>
+          <li>Resolved cross-feature <strong>merge conflicts</strong> during major upstream framework upgrades (React 18 → 19, Next.js 14 → 16, Expo SDK 52 → 54).</li>
+          <li>Tested a new guest reservation widget against eight production scenarios; delivered a prioritized fix-list with concrete UI proposals to the lead engineer.</li>
+          <li>Learning modern software-engineering practices through <strong>AI-assisted development with Claude Code</strong> in a multi-agent git-worktree workflow.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="entry">
+        <h3>University of Florence (UNIFI) <span class="when">2024 – 2027 (expected)</span></h3>
+        <div class="where">Bachelor's in Computer Science</div>
+      </div>
+      <div class="entry">
+        <h3>British Secondary School <span class="when">2017 – 2020</span></h3>
+        <div class="where">IGCSE, A-Levels</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Selected projects</h2>
+
+      <div class="entry">
+        <h3>BookLink — Full-Stack Booking Platform <span class="when">in progress</span></h3>
+        <div class="where">Java · Spring Boot · MySQL · JavaScript · <a href="https://github.com/Esra-el/Booklink">github.com/Esra-el/Booklink</a></div>
+        <ul>
+          <li>REST API backend in Spring Boot for a platform where service providers get a personal booking link and clients book sessions directly.</li>
+          <li>JPA entities + repositories over a 3-table relational schema with one-to-many relations and FKs.</li>
+          <li>Endpoints for provider profiles, slot management, and bookings, with transactional row-locking on slot booking to prevent double-booking.</li>
+          <li>Adding JWT authentication, email confirmation (JavaMailSender), and a responsive frontend.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3>Multi-Cipher Encryption Engine</h3>
+        <div class="where">RISC-V Assembly · <a href="https://github.com/Esra-el/cipher-assembly">github.com/Esra-el/cipher-assembly</a></div>
+        <ul>
+          <li>Five composable ciphers in raw RISC-V assembly (Caesar, keyed Vigenère-style, positional, complement, reversal) — built from scratch, no libraries.</li>
+          <li>Stack-based LIFO ordering to record applied ciphers and reverse them on decryption; each transform a subroutine following proper calling conventions.</li>
+          <li>Manual modular arithmetic, register management, memory addressing, and syscalls for I/O.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3>Progetto BDSI — Pharmacy Database</h3>
+        <div class="where">SQL · MySQL · <a href="https://github.com/Esra-el/pharmacy-database">github.com/Esra-el/pharmacy-database</a></div>
+        <ul>
+          <li>Relational database for inventory, sales, clients, prescriptions, distributors.</li>
+          <li>ER diagrams, logical schema, views, stored procedures, functions, and triggers.</li>
+          <li>Queries for inventory updates, chronic patient tracking, defected-lot management.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3>Algorithm Tree Project</h3>
+        <div class="where">Java · <a href="https://github.com/Esra-el/algorithm-project">github.com/Esra-el/algorithm-project</a></div>
+        <ul>
+          <li>Generic tree data structure with parent/child relations; DFS + BFS traversals; height and node-level computations.</li>
+          <li>Built with strict OOP and recursion; thoroughly tested.</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <h3>Logistics Company Website <span class="when">client project</span></h3>
+        <div class="where">HTML · CSS · JavaScript · <a href="https://github.com/Esra-el/Logistics-Company-Website">github.com/Esra-el/Logistics-Company-Website</a> · Live at elareibi.com</div>
+        <ul>
+          <li>Designed and built a responsive marketing website for a logistics company — clear navigation, service pages, mobile-friendly layout, modern styling.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Technical skills</h2>
+      <div class="skills-grid">
+        <div class="label">Languages</div>
+        <div class="value">Java · TypeScript · JavaScript · SQL · HTML/CSS · RISC-V Assembly</div>
+
+        <div class="label">Frameworks</div>
+        <div class="value">Spring Boot (REST, JPA, JWT) · NestJS · Next.js · React · React Native + Expo</div>
+
+        <div class="label">Databases</div>
+        <div class="value">PostgreSQL · MySQL — relational design, normalization, queries</div>
+
+        <div class="label">ORMs</div>
+        <div class="value">JPA / Hibernate · Prisma</div>
+
+        <div class="label">Tools</div>
+        <div class="value">Git (worktrees, pull requests, conflict resolution) · IntelliJ IDEA · VS Code · MySQL Workbench · pnpm · Claude Code (AI-assisted development)</div>
+
+        <div class="label">Testing</div>
+        <div class="value">JUnit · Jest</div>
+
+        <div class="label">Concepts</div>
+        <div class="value">OOP · REST APIs · JWT auth · Server-Sent Events (SSE) · monorepo architecture · multi-tenant SaaS · relational database design · computer architecture</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Certifications</h2>
+      <div class="entry">
+        <h3>HTML &amp; CSS Workshop, 42 Firenze <span class="when">2026</span></h3>
+        <div class="where">Hands-on Web Development Workshop</div>
+      </div>
+      <div class="entry">
+        <h3>TEFL Certificate <span class="when">2021</span></h3>
+        <div class="where">Teaching English as a Foreign Language</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Languages spoken</h2>
+      <p class="langs"><strong>English</strong> · <strong>Italian</strong> · <strong>Arabic</strong> — all fluent</p>
+    </section>
+
+  </main>
+</body>
+</html>

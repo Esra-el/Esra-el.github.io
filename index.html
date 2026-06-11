@@ -108,6 +108,21 @@
     color: var(--accent);
     font-weight: 600;
   }
+  /* hand-drawn / pencil-stroke per-letter reveal */
+  .hero-text h1 .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.18em) rotate(var(--r, 0deg));
+    animation: drawIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 0.06s + 0.25s);
+    will-change: transform, opacity;
+  }
+  @keyframes drawIn {
+    to {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+  }
   .hero-text p {
     margin: 0 0 32px 0;
     color: var(--text-soft);
@@ -742,59 +757,45 @@
     });
   })();
 
-  // ── 2. Glitch text reveal on the hero heading ──────────────────
+  // ── 2. Hand-drawn pencil-stroke reveal of the hero heading ───
   (function() {
-    const SCRAMBLE = '!@#$%^&*<>{}[]/?abcdefghijklmnopqrstuvwxyz0123456789';
     const h1 = document.getElementById('glitch-h1');
     if (!h1) return;
-    // Save the original innerHTML so the colored span is preserved
-    const originalHTML = h1.innerHTML;
-
-    function scrambleOnce(plainTarget, duration, doneCallback) {
-      const start = performance.now();
-      const len = plainTarget.length;
-      const reveal = new Array(len).fill(false);
-      // schedule each character to "lock in" at its own time
-      const locks = plainTarget.split('').map(() => Math.random() * duration);
-
-      function frame(now) {
-        const t = now - start;
-        let out = '';
-        for (let i = 0; i < len; i++) {
-          const c = plainTarget[i];
-          if (c === ' ') { out += ' '; continue; }
-          if (t > locks[i]) { reveal[i] = true; }
-          if (reveal[i]) {
-            out += c;
-          } else {
-            out += SCRAMBLE[Math.floor(Math.random() * SCRAMBLE.length)];
-          }
-        }
-        h1.textContent = out;
-        if (t < duration) {
-          requestAnimationFrame(frame);
-        } else {
-          // restore the colored span
-          h1.innerHTML = originalHTML;
-          if (doneCallback) doneCallback();
-        }
+    // Manually split the heading into per-character spans, keeping the
+    // "esra" highlight intact. Each char gets a stagger index (--i) and
+    // a small random rotation (--r) so the line settles like pencil work.
+    const parts = [
+      { text: 'hi,',   cls: '' },
+      { text: ' ',     cls: 'space' },
+      { text: 'esra',  cls: 'you' },
+      { text: ' ',     cls: 'space' },
+      { text: 'here.', cls: '' }
+    ];
+    let html = '';
+    let idx = 0;
+    parts.forEach(part => {
+      if (part.cls === 'space') { html += ' '; return; }
+      let inner = '';
+      for (const ch of part.text) {
+        const r = (Math.random() - 0.5) * 5; // ±2.5deg wobble
+        inner += '<span class="char" style="--i:' + (idx++) + ';--r:' + r.toFixed(1) + 'deg">' + ch + '</span>';
       }
-      requestAnimationFrame(frame);
-    }
+      html += part.cls ? '<span class="' + part.cls + '">' + inner + '</span>' : inner;
+    });
+    h1.innerHTML = html;
 
-    // initial reveal
-    const plainText = h1.textContent;
-    scrambleOnce(plainText, 1100);
-
-    // on hover, re-scramble briefly
+    // Re-trigger the draw-in animation on hover (so it can be re-watched).
     let cooldown = false;
     h1.addEventListener('mouseenter', () => {
       if (cooldown) return;
       cooldown = true;
-      const plain = h1.textContent;
-      scrambleOnce(plain, 700, () => {
-        setTimeout(() => { cooldown = false; }, 300);
+      h1.querySelectorAll('.char').forEach(c => {
+        c.style.animation = 'none';
+        // Force reflow so the animation restart actually fires
+        void c.offsetWidth;
+        c.style.animation = '';
       });
+      setTimeout(() => { cooldown = false; }, 1600);
     });
   })();
 </script>

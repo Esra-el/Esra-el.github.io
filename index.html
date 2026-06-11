@@ -92,13 +92,13 @@
     padding: 110px 0 100px 0;
     border-bottom: 1px solid var(--line);
     display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 80px;
+    grid-template-columns: 240px 1fr;
+    gap: 60px;
     align-items: center;
   }
   .avatar-wrap {
-    width: 320px; height: 320px;
-    display: flex; align-items: center; justify-content: center;
+    width: 240px; height: 240px;
+    display: flex; align-items: center; justify-content: flex-start;
     position: relative;
   }
   #avatar-canvas { display: block; cursor: crosshair; }
@@ -315,8 +315,9 @@
   }
   .art-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 280px));
+    justify-content: center;
+    gap: 36px;
   }
   .art-piece {
     position: relative;
@@ -435,7 +436,7 @@
     <!-- HERO -->
     <section class="hero" id="home">
       <div class="avatar-wrap">
-        <canvas id="avatar-canvas" width="320" height="320" aria-label="Dotted portrait of Esra that follows the cursor"></canvas>
+        <canvas id="avatar-canvas" width="240" height="240" aria-label="Hand-drawn pencil portrait of Esra"></canvas>
       </div>
       <div class="hero-text">
         <h1 id="glitch-h1">hi, <span class="you" id="glitch-name">esra</span> here.</h1>
@@ -649,7 +650,7 @@
     const canvas = document.getElementById('avatar-canvas');
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    const SIZE = 320;
+    const SIZE = 240;
     const dpr = window.devicePixelRatio || 1;
     canvas.width = SIZE * dpr;
     canvas.height = SIZE * dpr;

@@ -108,24 +108,20 @@
     color: var(--accent);
     font-weight: 600;
   }
-  /* Style 1: Typewriter — letters appear one by one, cursor blinks */
+  /* hand-drawn / pencil-stroke per-letter reveal — matches the sketch avatar */
   .hero-text h1 .char {
     display: inline-block;
     opacity: 0;
-    animation: typeIn 0.01s linear forwards;
-    animation-delay: calc(var(--i, 0) * 0.075s + 0.2s);
+    transform: translateY(0.18em) rotate(var(--r, 0deg));
+    animation: drawIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 0.06s + 0.25s);
+    will-change: transform, opacity;
   }
-  @keyframes typeIn { to { opacity: 1; } }
-  .hero-text h1 .cursor {
-    display: inline-block;
-    margin-left: 2px;
-    color: var(--accent);
-    font-weight: 200;
-    animation: blink 0.85s steps(1, end) infinite;
-  }
-  @keyframes blink {
-    0%, 50%   { opacity: 1; }
-    51%, 100% { opacity: 0; }
+  @keyframes drawIn {
+    to {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
   }
   .hero-text p {
     margin: 0 0 32px 0;
@@ -478,7 +474,7 @@
         <ul>
           <li>Shipped the staff-app side of the <em>"join tables"</em> feature end-to-end — REST endpoints, Prisma schema additions, shared TypeScript types, and the React Native UI on the floor-plan screen. Open as a draft PR: 24 commits, ~2,000 lines.</li>
           <li>Set up the staff-app iOS Simulator build pipeline (Expo prebuild + CocoaPods + native plugin patches) — the first iOS build on the project.</li>
-          <li>Resolved cross-feature merge conflicts during major upstream upgrades (React 18 → 19, Next.js 14 → 16, Expo SDK 52 → 54) inside a multi-agent git-worktree workflow.</li>
+          <li>Resolved cross-feature merge conflicts <em>from</em> major upstream framework upgrades (React 18 → 19, Next.js 14 → 16, Expo SDK 52 → 54) inside a multi-agent git-worktree workflow.</li>
           <li>Tested a new guest reservation widget against eight production scenarios and delivered a prioritized fix-list to the lead engineer.</li>
         </ul>
       </div>
@@ -781,11 +777,11 @@
       if (part.cls === 'space') { html += ' '; return; }
       let inner = '';
       for (const ch of part.text) {
-        inner += '<span class="char" style="--i:' + (idx++) + '">' + ch + '</span>';
+        const r = (Math.random() - 0.5) * 5; // ±2.5° wobble — pencil-stroke feel
+        inner += '<span class="char" style="--i:' + (idx++) + ';--r:' + r.toFixed(1) + 'deg">' + ch + '</span>';
       }
       html += part.cls ? '<span class="' + part.cls + '">' + inner + '</span>' : inner;
     });
-    html += '<span class="cursor">|</span>';
     h1.innerHTML = html;
 
     // Re-trigger the draw-in animation on hover (so it can be re-watched).

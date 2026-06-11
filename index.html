@@ -206,11 +206,28 @@
   }
   .featured:hover { border-color: var(--text); }
   .featured-image {
+    display: block;
     width: 100%; height: 360px;
-    background: #fff;
+    background: #ffffff;
     border-bottom: 1px solid var(--line);
     overflow: hidden;
     position: relative;
+    cursor: pointer;
+  }
+  .featured-image::after {
+    /* "Live preview" hint badge in the corner */
+    content: "LIVE PREVIEW · click to open ↗";
+    position: absolute;
+    bottom: 12px; right: 12px;
+    background: rgba(10, 10, 10, 0.85);
+    color: #fff;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 10px;
+    letter-spacing: 0.6px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    z-index: 2;
+    pointer-events: none;
   }
   .featured-image iframe {
     position: absolute;
@@ -410,10 +427,10 @@
       <div class="about-grid">
         <div class="about-text">
           <p>
-            I'm a second-year Computer Science student at the University of Florence (<strong>UNIFI</strong>), currently contributing as a software-engineering intern at <strong>Chequo</strong> — a cloud-native SaaS POS for European restaurants.
+            I'm a second-year Computer Science student at the University of Florence (<strong>UNIFI</strong>), currently contributing as a software-engineering intern at <a href="https://chequo.com" style="color:var(--text);border-bottom:1px solid var(--text);padding-bottom:1px">Chequo</a> — a cloud-native SaaS POS for European restaurants.
           </p>
           <p>
-            I love building end-to-end: from a Prisma schema and REST endpoint, through React Native screens on a tablet, to the merge-conflict resolution that brings someone else's work into mine. My background is broad on purpose — I've shipped Java, TypeScript, SQL, and even raw RISC-V assembly.
+            My core language is Java/OOP. At Chequo I work in TypeScript and React Native — <strong>Claude Code</strong> is my pair-programmer, so I can move fast in unfamiliar stacks while I make the architectural calls and own the review. The work is real (a draft PR with 24 commits, ~2,000 lines, conflict resolution across major framework upgrades).
           </p>
           <p>Here are some technologies I have been working with:</p>
           <div class="tech-list">
@@ -424,7 +441,7 @@
             <span>JPA / Hibernate</span><span>MySQL</span>
           </div>
           <p>
-            Outside of code, I paint — mostly portraits and still life in oil. I also teach English, sketch UI in Figma, and read more about computer architecture than I probably need to.
+            Outside of code, I paint — mostly portraits and studies in oil. I sketch UI in Figma, lean on Claude Code in my day-to-day workflow, and read more about computer architecture than I probably need to.
           </p>
         </div>
         <div class="about-photo">
@@ -534,7 +551,7 @@
           <div class="art-piece">
             <img src="art/portrait.jpg" alt="Oil painting — portrait of an elderly woman in profile">
           </div>
-          <div class="art-caption"><span class="title">portrait, in profile</span><span>oil on canvas</span></div>
+          <div class="art-caption"><span class="title">Judith Beheading Holofernes</span><span>study, oil on canvas</span></div>
         </div>
         <div>
           <div class="art-piece">

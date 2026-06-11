@@ -3,22 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Esra Elareibi — Software Engineer</title>
-<meta name="description" content="Esra Elareibi — Computer Science student & software engineer, Florence. Backend, mobile, full-stack.">
+<title>Esra Elareibi — Software Engineer & Artist</title>
+<meta name="description" content="Esra Elareibi — Computer Science student & software engineer in Florence. Backend, mobile, full-stack. Oil painter.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; }
   :root {
-    --bg:        #0d1b2a;
-    --bg-soft:   #142133;
-    --line:      #1f3148;
-    --line-soft: #2a3d56;
-    --text:      #e8edf3;
-    --muted:     #8a99b3;
-    --accent:    #7fe6cb;
-    --accent-2:  #51d4b3;
+    --bg:        #fafaf8;
+    --bg-soft:   #f3f1ed;
+    --line:      #e2dfd9;
+    --line-soft: #d1cec7;
+    --text:      #1a1a1a;
+    --text-soft: #2e2e2e;
+    --muted:     #6e6e6e;
+    --accent:    #1a1a1a;
   }
   html { scroll-behavior: smooth; }
   body {
@@ -26,292 +26,328 @@
     font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
     color: var(--text);
     background: var(--bg);
-    line-height: 1.6;
+    line-height: 1.65;
     font-size: 15px;
+    -webkit-font-smoothing: antialiased;
   }
-  a { color: var(--accent); text-decoration: none; transition: opacity .2s; }
-  a:hover { opacity: .8; }
+  a { color: var(--text); text-decoration: none; transition: opacity .2s; }
+  a:hover { opacity: .55; }
   .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
-  ::selection { background: var(--accent); color: var(--bg); }
+  ::selection { background: #1a1a1a; color: var(--bg); }
 
+  /* ── Top nav ────────────────────────────────────────────────── */
   nav.top {
     position: sticky; top: 0; z-index: 50;
-    backdrop-filter: blur(10px);
-    background: rgba(13, 27, 42, 0.85);
+    backdrop-filter: blur(12px);
+    background: rgba(250, 250, 248, 0.85);
     border-bottom: 1px solid var(--line);
     padding: 14px 0;
   }
   nav.top .inner {
-    max-width: 1080px; margin: 0 auto; padding: 0 32px;
+    max-width: 1100px; margin: 0 auto; padding: 0 32px;
     display: flex; justify-content: space-between; align-items: center;
     font-size: 13px;
   }
-  nav.top .brand { font-weight: 600; }
-  nav.top .links { display: flex; gap: 24px; }
-  nav.top .links a { color: var(--text); }
-  nav.top .links a:hover { color: var(--accent); opacity: 1; }
-  nav.top .socials { display: flex; gap: 14px; align-items: center; }
-  nav.top .socials a { color: var(--text); font-size: 14px; }
-  nav.top .socials a:hover { color: var(--accent); }
+  nav.top .brand { font-weight: 600; letter-spacing: -0.2px; }
+  nav.top .links { display: flex; gap: 26px; }
+  nav.top .links a { color: var(--text-soft); }
+  nav.top .socials { display: flex; gap: 16px; }
+  nav.top .socials a { color: var(--text-soft); font-size: 14px; }
 
-  main { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
-  section { padding: 80px 0; border-bottom: 1px dashed var(--line-soft); }
-  section:last-child { border-bottom: none; }
+  /* ── Layout ─────────────────────────────────────────────────── */
+  main { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 90px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
   .h2 {
     font-family: "JetBrains Mono", monospace;
     font-size: 28px; font-weight: 500;
     color: var(--text);
     display: flex; align-items: center; gap: 16px;
-    margin: 0 0 40px 0;
+    margin: 0 0 44px 0;
   }
-  .h2 .slash { color: var(--accent); }
-  .h2::after { content: ""; flex: 1; border-bottom: 1px dashed var(--line-soft); }
+  .h2 .slash { color: var(--muted); }
+  .h2::after { content: ""; flex: 1; border-bottom: 1px solid var(--line); }
+  .h2 .right { font-size: 13px; color: var(--muted); font-weight: 400; }
 
+  /* ── Hero ───────────────────────────────────────────────────── */
   .hero {
-    padding: 100px 0 80px 0;
-    border-bottom: 1px dashed var(--line-soft);
+    padding: 100px 0 90px 0;
+    border-bottom: 1px solid var(--line);
     display: grid;
     grid-template-columns: 280px 1fr;
-    gap: 60px;
+    gap: 80px;
     align-items: center;
   }
-  .avatar {
+  .avatar-wrap {
     width: 280px; height: 280px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #1c3148 0%, #0d1b2a 100%);
-    border: 2px solid var(--line);
     display: flex; align-items: center; justify-content: center;
     position: relative;
-    overflow: hidden;
+    cursor: crosshair;
   }
-  .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-  .avatar .pattern {
-    width: 220px; height: 220px;
-    background-image: radial-gradient(circle, var(--accent) 1.2px, transparent 1.5px);
-    background-size: 12px 12px;
-    opacity: .35;
-    border-radius: 50%;
-    -webkit-mask: radial-gradient(circle at center, #000 60%, transparent 70%);
-            mask: radial-gradient(circle at center, #000 60%, transparent 70%);
-  }
+  #avatar-canvas { display: block; }
   .hero-text h1 {
     font-family: "JetBrains Mono", monospace;
-    font-size: 44px; font-weight: 400;
-    margin: 0 0 20px 0;
-    letter-spacing: -0.5px;
+    font-size: 48px; font-weight: 300;
+    margin: 0 0 24px 0;
+    letter-spacing: -1px;
+    line-height: 1.1;
   }
-  .hero-text h1 .you { color: var(--accent); font-weight: 600; }
+  .hero-text h1 .you {
+    font-weight: 600;
+    background: linear-gradient(90deg, #1a1a1a 0%, #6e6e6e 100%);
+    -webkit-background-clip: text;
+            background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
   .hero-text p {
-    margin: 0 0 28px 0;
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.7;
-    max-width: 540px;
+    margin: 0 0 32px 0;
+    color: var(--text-soft);
+    font-size: 16px;
+    line-height: 1.75;
+    max-width: 560px;
   }
+  .hero-text p strong { color: var(--text); font-weight: 600; }
   .cta {
     display: inline-flex; align-items: center; gap: 10px;
-    padding: 12px 22px;
-    border: 1px solid var(--accent);
-    border-radius: 8px;
-    color: var(--accent);
+    padding: 13px 24px;
+    border: 1.5px solid var(--text);
+    border-radius: 4px;
+    color: var(--text);
     font-family: "JetBrains Mono", monospace;
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 500;
     transition: all .2s;
   }
-  .cta:hover { background: var(--accent); color: var(--bg); opacity: 1; }
+  .cta:hover { background: var(--text); color: var(--bg); opacity: 1; }
 
+  /* ── About ──────────────────────────────────────────────────── */
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 50px;
+    grid-template-columns: 1fr 300px;
+    gap: 60px;
     align-items: start;
   }
-  .about-text p { margin: 0 0 16px 0; color: var(--text); }
-  .about-text strong { color: var(--accent); font-weight: 600; }
+  .about-text p { margin: 0 0 16px 0; color: var(--text-soft); }
+  .about-text strong { color: var(--text); font-weight: 600; }
   .tech-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4px 28px;
-    margin: 16px 0;
+    gap: 4px 32px;
+    margin: 20px 0;
     font-family: "JetBrains Mono", monospace;
     font-size: 13px;
     color: var(--muted);
   }
-  .tech-list span::before { content: "▸ "; color: var(--accent); }
+  .tech-list span::before { content: "▸ "; color: var(--text); }
   .about-photo {
-    width: 280px; height: 320px;
-    border-radius: 12px;
+    width: 300px; height: 360px;
+    border-radius: 6px;
     background: var(--bg-soft);
     border: 1px solid var(--line);
     overflow: hidden;
-    display: flex; align-items: center; justify-content: center;
-    color: var(--muted);
-    font-family: "JetBrains Mono", monospace;
-    font-size: 12px;
   }
-  .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .about-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(60%) contrast(1.04);
+    transition: filter .5s;
+    display: block;
+  }
+  .about-photo:hover img { filter: grayscale(0%); }
 
-  .exp-grid {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 40px;
+  /* ── Experience ─────────────────────────────────────────────── */
+  .exp {
+    border-left: 2px solid var(--text);
+    padding-left: 32px;
   }
-  .exp-tabs { display: flex; flex-direction: column; gap: 4px; }
-  .exp-tab {
-    padding: 10px 16px;
-    text-align: left;
-    background: none;
-    border: none;
-    border-left: 2px solid var(--line);
-    color: var(--muted);
-    font-family: "JetBrains Mono", monospace;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all .2s;
-  }
-  .exp-tab.active { border-left-color: var(--accent); color: var(--accent); background: rgba(127, 230, 203, 0.05); }
-  .exp-tab:hover { color: var(--text); }
-  .exp-content h3 {
+  .exp h3 {
     margin: 0 0 6px 0;
-    font-size: 19px;
+    font-size: 20px;
     font-weight: 600;
   }
-  .exp-content h3 .at { color: var(--accent); }
-  .exp-content .when {
+  .exp h3 .at { color: var(--muted); font-weight: 400; }
+  .exp .when {
     color: var(--muted);
     font-family: "JetBrains Mono", monospace;
     font-size: 12px;
     margin-bottom: 22px;
+    letter-spacing: 0.5px;
   }
-  .exp-content ul { padding-left: 0; list-style: none; }
-  .exp-content li {
+  .exp ul { padding-left: 0; list-style: none; }
+  .exp li {
     position: relative;
     padding-left: 22px;
     margin-bottom: 14px;
-    color: var(--text);
+    color: var(--text-soft);
   }
-  .exp-content li::before {
+  .exp li::before {
     content: "▸";
     position: absolute; left: 0; top: 0;
-    color: var(--accent);
+    color: var(--text);
   }
 
+  /* ── Projects ───────────────────────────────────────────────── */
   .featured {
     background: var(--bg-soft);
     border: 1px solid var(--line);
-    border-radius: 16px;
+    border-radius: 10px;
     overflow: hidden;
-    margin-bottom: 40px;
+    margin-bottom: 36px;
+    transition: border-color .2s;
   }
+  .featured:hover { border-color: var(--text); }
   .featured-image {
-    width: 100%; height: 320px;
-    background: linear-gradient(135deg, #1f3148 0%, #142133 100%);
+    width: 100%; height: 300px;
+    background: linear-gradient(135deg, #ece9e3 0%, #d9d6cf 100%);
     display: flex; align-items: center; justify-content: center;
     color: var(--muted);
     font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
     border-bottom: 1px solid var(--line);
   }
-  .featured-image img { width: 100%; height: 100%; object-fit: cover; }
   .featured-body { padding: 24px 28px; }
   .featured-body h3 { margin: 0 0 8px 0; font-size: 20px; font-weight: 600; }
-  .featured-body p { margin: 0 0 14px 0; color: var(--muted); }
+  .featured-body p { margin: 0 0 14px 0; color: var(--text-soft); }
   .featured-tags { display: flex; gap: 8px; flex-wrap: wrap; }
   .tag {
     font-family: "JetBrains Mono", monospace;
     font-size: 11px;
-    padding: 4px 10px;
+    padding: 5px 11px;
     border: 1px solid var(--line-soft);
     border-radius: 12px;
     color: var(--muted);
   }
-  .featured-links { margin-top: 16px; display: flex; gap: 16px; }
-  .featured-links a { font-family: "JetBrains Mono", monospace; font-size: 13px; }
+  .featured-links { margin-top: 16px; display: flex; gap: 20px; }
+  .featured-links a {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    border-bottom: 1px solid var(--text);
+    padding-bottom: 1px;
+  }
 
   .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 18px;
+    gap: 20px;
   }
   .card {
     background: var(--bg-soft);
     border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 22px;
+    border-radius: 8px;
+    padding: 24px;
     transition: border-color .2s, transform .2s;
     display: flex; flex-direction: column;
   }
-  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card:hover { border-color: var(--text); transform: translateY(-3px); }
   .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-  .card-folder { font-size: 22px; color: var(--accent); }
+  .card-folder { font-size: 22px; }
   .card-links { display: flex; gap: 10px; font-size: 13px; }
   .card-links a { color: var(--muted); }
   .card h4 { margin: 0 0 8px 0; font-size: 16px; font-weight: 600; }
-  .card p { margin: 0 0 14px 0; color: var(--muted); font-size: 13px; flex: 1; }
+  .card p { margin: 0 0 14px 0; color: var(--text-soft); font-size: 13px; flex: 1; }
   .card-tech {
     font-family: "JetBrains Mono", monospace;
     font-size: 11px;
     color: var(--muted);
   }
 
+  /* ── Art ────────────────────────────────────────────────────── */
+  .art-intro {
+    color: var(--text-soft);
+    max-width: 640px;
+    margin-bottom: 36px;
+  }
+  .art-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .art-piece {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    border-radius: 4px;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.10);
+    transition: transform .4s ease, box-shadow .4s ease;
+  }
+  .art-piece:hover { transform: scale(1.015); box-shadow: 0 14px 50px rgba(0,0,0,0.18); }
+  .art-piece img {
+    width: 100%; height: auto;
+    display: block;
+  }
+  .art-caption {
+    padding: 14px 4px 0;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.4px;
+    display: flex; justify-content: space-between;
+  }
+  .art-caption .title { color: var(--text); font-weight: 500; }
+
+  /* ── Skills ─────────────────────────────────────────────────── */
   .skills {
     display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 8px 24px;
+    grid-template-columns: 160px 1fr;
+    gap: 12px 28px;
     font-size: 14px;
   }
   .skill-label {
-    color: var(--accent);
+    color: var(--muted);
     font-family: "JetBrains Mono", monospace;
-    font-size: 13px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding-top: 2px;
   }
-  .skill-value { color: var(--muted); }
-  .skill-value strong { color: var(--text); font-weight: 500; }
+  .skill-value { color: var(--text-soft); }
+  .skill-value strong { color: var(--text); font-weight: 600; }
 
+  /* ── Contact / footer ───────────────────────────────────────── */
   .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 40px;
+    gap: 50px;
     align-items: center;
   }
-  .contact-grid p { color: var(--muted); }
+  .contact-grid p { color: var(--text-soft); }
   .contact-actions { display: flex; flex-direction: column; gap: 12px; }
   .contact-actions a {
     display: flex; align-items: center; gap: 12px;
-    padding: 12px 16px;
+    padding: 14px 18px;
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-radius: 6px;
     color: var(--text);
+    background: var(--bg-soft);
     font-family: "JetBrains Mono", monospace;
     font-size: 13px;
-    transition: border-color .2s;
+    transition: border-color .2s, background .2s;
   }
-  .contact-actions a:hover { border-color: var(--accent); opacity: 1; }
+  .contact-actions a:hover { border-color: var(--text); background: var(--bg); opacity: 1; }
 
   footer {
     text-align: center;
     color: var(--muted);
     font-family: "JetBrains Mono", monospace;
     font-size: 12px;
-    padding: 30px 0;
+    padding: 36px 0;
     border-top: 1px solid var(--line);
   }
 
+  /* ── Responsive ─────────────────────────────────────────────── */
   @media (max-width: 800px) {
     nav.top .links { display: none; }
-    .hero { grid-template-columns: 1fr; gap: 30px; text-align: center; }
-    .avatar { margin: 0 auto; }
-    .hero-text h1 { font-size: 32px; }
-    .about-grid { grid-template-columns: 1fr; }
-    .about-photo { width: 100%; max-width: 280px; margin: 0 auto; }
-    .exp-grid { grid-template-columns: 1fr; }
-    .exp-tabs { flex-direction: row; overflow-x: auto; }
-    .exp-tab { border-left: none; border-bottom: 2px solid var(--line); white-space: nowrap; }
-    .exp-tab.active { border-left: none; border-bottom-color: var(--accent); }
+    .hero { grid-template-columns: 1fr; gap: 36px; text-align: center; }
+    .avatar-wrap { margin: 0 auto; }
+    .hero-text h1 { font-size: 36px; }
+    .about-grid { grid-template-columns: 1fr; gap: 36px; }
+    .about-photo { width: 100%; max-width: 320px; height: 380px; margin: 0 auto; }
     .cards { grid-template-columns: 1fr; }
+    .art-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
     .skills { grid-template-columns: 1fr; gap: 4px; }
     section { padding: 60px 0; }
-    main { padding: 0 20px; }
+    main { padding: 0 22px; }
   }
 </style>
 </head>
@@ -319,13 +355,14 @@
 
   <nav class="top">
     <div class="inner">
-      <div class="brand mono">Esra Elareibi</div>
+      <div class="brand mono">esra elareibi</div>
       <div class="links mono">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
+        <a href="#home">home</a>
+        <a href="#about">about</a>
+        <a href="#experience">experience</a>
+        <a href="#projects">projects</a>
+        <a href="#art">art</a>
+        <a href="#contact">contact</a>
       </div>
       <div class="socials">
         <a href="mailto:esra.elareibi@yahoo.com" title="Email">✉</a>
@@ -337,29 +374,30 @@
 
   <main>
 
+    <!-- HERO -->
     <section class="hero" id="home">
-      <div class="avatar">
-        <!-- swap this <div class="pattern"></div> for <img src="esra.jpg" alt="Esra"> once you upload your photo -->
-        <div class="pattern"></div>
+      <div class="avatar-wrap">
+        <canvas id="avatar-canvas" width="280" height="280" aria-label="Interactive dotted avatar that follows the cursor"></canvas>
       </div>
       <div class="hero-text">
         <h1>hi, <span class="you">esra</span> here.</h1>
         <p>
-          Computer Science student at the University of Florence and software-engineering intern at <strong style="color:var(--accent)">Chequo</strong>, where I ship production code on a multi-tenant SaaS for European restaurants. I love working across the whole stack — backend, web, mobile — and I treat AI-assisted development as a daily force multiplier.
+          Computer Science student at the University of Florence and software-engineering intern at <strong>Chequo</strong>. I ship production code on a multi-tenant SaaS by day, and paint with oil at night. Occasionally both happen at the same time.
         </p>
-        <a href="mailto:esra.elareibi@yahoo.com" class="cta">✉  Say hi!</a>
+        <a href="mailto:esra.elareibi@yahoo.com" class="cta">✉&nbsp; Say hi!</a>
       </div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about">
       <h2 class="h2"><span class="slash">/</span> about me</h2>
       <div class="about-grid">
         <div class="about-text">
           <p>
-            I'm a second-year Computer Science student at the University of Florence (<strong>UNIFI</strong>), currently contributing as a software engineering intern at <strong>Chequo</strong> — a cloud-native SaaS POS for European restaurants.
+            I'm a second-year Computer Science student at the University of Florence (<strong>UNIFI</strong>), currently contributing as a software-engineering intern at <strong>Chequo</strong> — a cloud-native SaaS POS for European restaurants.
           </p>
           <p>
-            I love building end-to-end: from a Prisma schema and REST endpoint, through React Native screens on a tablet, to the merge conflict resolution that brings someone else's work into mine. My background is broad on purpose — I've shipped Java, TypeScript, SQL, and even raw RISC-V assembly.
+            I love building end-to-end: from a Prisma schema and REST endpoint, through React Native screens on a tablet, to the merge-conflict resolution that brings someone else's work into mine. My background is broad on purpose — I've shipped Java, TypeScript, SQL, and even raw RISC-V assembly.
           </p>
           <p>Here are some technologies I have been working with:</p>
           <div class="tech-list">
@@ -370,59 +408,43 @@
             <span>JPA / Hibernate</span><span>MySQL</span>
           </div>
           <p>
-            In my free time, I teach English, sketch logos and small UI designs, and explore the parts of computer science I don't get in class — recently it's been AI tooling and a deeper dive into low-level architecture.
+            Outside of code, I paint — mostly portraits and still life in oil. I also teach English, sketch UI in Figma, and read more about computer architecture than I probably need to.
           </p>
         </div>
         <div class="about-photo">
-          <!-- swap "your photo here" for <img src="esra-portrait.jpg" alt="Esra portrait"> -->
-          your photo here
+          <img src="esra.jpg" alt="Esra Elareibi portrait">
         </div>
       </div>
     </section>
 
+    <!-- EXPERIENCE -->
     <section id="experience">
       <h2 class="h2"><span class="slash">/</span> experience</h2>
-      <div class="exp-grid">
-        <div class="exp-tabs">
-          <button class="exp-tab active mono" data-tab="chequo">Chequo</button>
-          <button class="exp-tab mono" data-tab="britishi">British Institute</button>
-        </div>
-
-        <div class="exp-content" id="exp-chequo">
-          <h3>Software Engineering Intern <span class="at">@ Chequo · Nilson LLC</span></h3>
-          <div class="when mono">2026 — PRESENT</div>
-          <ul>
-            <li>Shipped the staff-app side of the <em>"join tables"</em> feature end-to-end — REST endpoints, Prisma schema additions, shared TypeScript types, and the React Native UI on the floor-plan screen. Open as a draft PR: 24 commits, ~2,000 lines.</li>
-            <li>Set up the staff-app iOS Simulator build pipeline (Expo prebuild + CocoaPods + native plugin patches) — the first iOS build on the project.</li>
-            <li>Resolved cross-feature merge conflicts during major upstream upgrades (React 18 → 19, Next.js 14 → 16, Expo SDK 52 → 54) inside a multi-agent git-worktree workflow.</li>
-            <li>Tested a new guest reservation widget against eight production scenarios and delivered a prioritized fix-list to the lead engineer.</li>
-          </ul>
-        </div>
-
-        <div class="exp-content" id="exp-britishi" style="display:none">
-          <h3>English Teacher <span class="at">@ British Institute</span></h3>
-          <div class="when mono">2022 — PRESENT</div>
-          <ul>
-            <li>Teach English to students of varying ages and skill levels.</li>
-            <li>Plan and deliver lessons across reading, writing, speaking, and listening.</li>
-            <li>Provide individual support and track student progress over time.</li>
-          </ul>
-        </div>
+      <div class="exp">
+        <h3>Software Engineering Intern <span class="at">@ Chequo · Nilson LLC</span></h3>
+        <div class="when mono">2026 — PRESENT</div>
+        <ul>
+          <li>Shipped the staff-app side of the <em>"join tables"</em> feature end-to-end — REST endpoints, Prisma schema additions, shared TypeScript types, and the React Native UI on the floor-plan screen. Open as a draft PR: 24 commits, ~2,000 lines.</li>
+          <li>Set up the staff-app iOS Simulator build pipeline (Expo prebuild + CocoaPods + native plugin patches) — the first iOS build on the project.</li>
+          <li>Resolved cross-feature merge conflicts during major upstream upgrades (React 18 → 19, Next.js 14 → 16, Expo SDK 52 → 54) inside a multi-agent git-worktree workflow.</li>
+          <li>Tested a new guest reservation widget against eight production scenarios and delivered a prioritized fix-list to the lead engineer.</li>
+        </ul>
       </div>
     </section>
 
+    <!-- PROJECTS -->
     <section id="projects">
       <h2 class="h2"><span class="slash">/</span> projects</h2>
 
+      <!-- Featured -->
       <div class="featured">
         <div class="featured-image">
-          <!-- swap with <img src="screenshots/booklink-1.png" alt="BookLink screenshot"> -->
-          BookLink screenshot goes here
+          BookLink — screenshot coming soon
         </div>
         <div class="featured-body">
           <h3>BookLink — One link. Infinite bookings.</h3>
           <p>
-            A full-stack booking platform where service providers get a personal booking link and clients book sessions directly. REST API in Spring Boot over a 3-table relational schema with transactional row-locking on slot booking. Frontend in vanilla HTML/CSS/JS, deployed at <a href="https://esra-el.github.io/booklink-site/">esra-el.github.io/booklink-site/</a>.
+            A full-stack booking platform where service providers get a personal booking link and clients book sessions directly. REST API in Spring Boot over a 3-table relational schema with transactional row-locking on slot booking. Frontend live at <a href="https://esra-el.github.io/booklink-site/" style="border-bottom:1px solid var(--text);padding-bottom:1px">esra-el.github.io/booklink-site</a>.
           </p>
           <div class="featured-tags">
             <span class="tag">Java</span>
@@ -439,6 +461,7 @@
         </div>
       </div>
 
+      <!-- Other projects -->
       <div class="cards">
 
         <div class="card">
@@ -484,6 +507,29 @@
       </div>
     </section>
 
+    <!-- ART -->
+    <section id="art">
+      <h2 class="h2"><span class="slash">/</span> art <span class="right">oil on canvas</span></h2>
+      <p class="art-intro">
+        When I'm not writing code, I paint — mostly portraits and quiet still-life pieces in oil. A dramatic dark ground and chiaroscuro light are recurring themes.
+      </p>
+      <div class="art-grid">
+        <div>
+          <div class="art-piece">
+            <img src="art/portrait.jpg" alt="Oil painting — portrait of an elderly woman in profile">
+          </div>
+          <div class="art-caption"><span class="title">portrait, in profile</span><span>oil on canvas</span></div>
+        </div>
+        <div>
+          <div class="art-piece">
+            <img src="art/koi.jpg" alt="Oil painting — two koi fish in yin-yang composition">
+          </div>
+          <div class="art-caption"><span class="title">koi, yin &amp; yang</span><span>oil on canvas</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
     <section id="skills">
       <h2 class="h2"><span class="slash">/</span> skills</h2>
       <div class="skills">
@@ -508,11 +554,12 @@
         <div class="skill-label">concepts</div>
         <div class="skill-value">OOP · REST APIs · JWT · Server-Sent Events · monorepo · multi-tenant SaaS · relational design · computer architecture</div>
 
-        <div class="skill-label">languages I speak</div>
+        <div class="skill-label">spoken</div>
         <div class="skill-value"><strong>English</strong> · <strong>Italian</strong> · <strong>Arabic</strong> — all fluent</div>
       </div>
     </section>
 
+    <!-- CONTACT -->
     <section id="contact">
       <h2 class="h2"><span class="slash">/</span> contact</h2>
       <div class="contact-grid">
@@ -521,9 +568,9 @@
           <p style="color:var(--muted);font-size:13px;margin-top:20px">Florence, Italy</p>
         </div>
         <div class="contact-actions">
-          <a href="mailto:esra.elareibi@yahoo.com">✉  esra.elareibi@yahoo.com</a>
-          <a href="https://github.com/Esra-el">⌥  github.com/Esra-el</a>
-          <a href="https://linkedin.com/in/esra-elar-/">in  linkedin.com/in/esra-elar-</a>
+          <a href="mailto:esra.elareibi@yahoo.com">✉&nbsp;&nbsp;esra.elareibi@yahoo.com</a>
+          <a href="https://github.com/Esra-el">⌥&nbsp;&nbsp;github.com/Esra-el</a>
+          <a href="https://linkedin.com/in/esra-elar-/">in&nbsp;&nbsp;linkedin.com/in/esra-elar-</a>
         </div>
       </div>
     </section>
@@ -535,16 +582,74 @@
   </footer>
 
 <script>
-  document.querySelectorAll('.exp-tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.tab;
-      document.querySelectorAll('.exp-tab').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.exp-content').forEach(c => c.style.display = 'none');
-      const next = document.getElementById('exp-' + target);
-      if (next) next.style.display = 'block';
+  // ── Interactive dotted avatar canvas ─────────────────────────
+  (function() {
+    const canvas = document.getElementById('avatar-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const SIZE = 280;
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = SIZE * dpr;
+    canvas.height = SIZE * dpr;
+    canvas.style.width = SIZE + 'px';
+    canvas.style.height = SIZE + 'px';
+    ctx.scale(dpr, dpr);
+
+    const center = SIZE / 2;
+    const dots = [];
+    // Build concentric rings of dots forming a soft circle
+    for (let r = 12; r <= 130; r += 7) {
+      const count = Math.max(8, Math.floor(2 * Math.PI * r / 9));
+      for (let i = 0; i < count; i++) {
+        const angle = (i / count) * 2 * Math.PI;
+        dots.push({
+          bx: Math.cos(angle) * r,
+          by: Math.sin(angle) * r,
+          x: Math.cos(angle) * r,
+          y: Math.sin(angle) * r
+        });
+      }
+    }
+
+    let mx = 0, my = 0, active = false;
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      mx = e.clientX - rect.left - center;
+      my = e.clientY - rect.top - center;
+      active = true;
     });
-  });
+    canvas.addEventListener('mouseleave', () => { active = false; });
+
+    function tick() {
+      ctx.clearRect(0, 0, SIZE, SIZE);
+      dots.forEach(d => {
+        let tx = d.bx, ty = d.by;
+        if (active) {
+          const dx = mx - d.bx;
+          const dy = my - d.by;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const pull = Math.max(0, 1 - dist / 120) * 22;
+          tx = d.bx + (dist ? (dx / dist) * pull : 0);
+          ty = d.by + (dist ? (dy / dist) * pull : 0);
+        }
+        // ease toward target
+        d.x += (tx - d.x) * 0.18;
+        d.y += (ty - d.y) * 0.18;
+
+        // dot size depends on distance from base (pulled dots get slightly bigger)
+        const drift = Math.hypot(d.x - d.bx, d.y - d.by);
+        const radius = 1.4 + drift * 0.04;
+        const opacity = 0.85 - drift * 0.012;
+
+        ctx.fillStyle = 'rgba(26, 26, 26, ' + Math.max(0.3, opacity) + ')';
+        ctx.beginPath();
+        ctx.arc(center + d.x, center + d.y, radius, 0, 2 * Math.PI);
+        ctx.fill();
+      });
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
 </script>
 
 </body>

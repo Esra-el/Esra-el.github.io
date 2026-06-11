@@ -3,168 +3,209 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Esra Elareibi — Software Engineer</title>
-<meta name="description" content="Esra Elareibi — Computer Science student & software engineer, Florence. Backend, mobile, full-stack.">
+<title>Esra Elareibi — CV</title>
+<meta name="description" content="Esra Elareibi — Computer Science student & software engineer, Florence. Full CV.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* ── Reset & base ───────────────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  :root {
+    --bg:        #0a0a0a;
+    --bg-soft:   #141414;
+    --line:      #232323;
+    --line-soft: #2e2e2e;
+    --text:      #f0f0f0;
+    --text-soft: #c4c4c4;
+    --muted:     #7a7a7a;
+    --accent:    #f5f5f5;
+  }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
-    color: #1a1a1a;
-    line-height: 1.55;
-    background: #f8f7f3;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
     font-size: 14px;
+    -webkit-font-smoothing: antialiased;
   }
+  a { color: var(--text); text-decoration: none; transition: opacity .2s; }
+  a:hover { opacity: .65; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+  ::selection { background: var(--text); color: var(--bg); }
 
-  /* ── Layout ─────────────────────────────────────────────── */
-  .page {
-    max-width: 820px;
-    margin: 32px auto;
-    padding: 48px 56px;
-    background: #ffffff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05),
-                0 8px 32px rgba(0, 0, 0, 0.04);
-    border-radius: 4px;
+  /* ── Top nav ────────────────────────────────────────────── */
+  .topbar {
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
+    background: var(--bg);
+  }
+  .topbar .inner {
+    max-width: 880px; margin: 0 auto; padding: 0 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px;
+    font-family: "JetBrains Mono", monospace;
+  }
+  .topbar a { color: var(--text-soft); border-bottom: 1px dotted var(--line-soft); padding-bottom: 1px; }
+  .topbar .right { color: var(--muted); }
+
+  /* ── Page ───────────────────────────────────────────────── */
+  main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
   }
 
   /* ── Header ─────────────────────────────────────────────── */
-  header {
-    border-bottom: 2px solid #1a1a1a;
-    padding-bottom: 18px;
-    margin-bottom: 28px;
+  header.cv-head {
+    padding-bottom: 22px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 8px;
   }
-  h1 {
-    margin: 0 0 6px 0;
+  header.cv-head h1 {
+    font-family: "JetBrains Mono", monospace;
     font-size: 30px;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: -0.5px;
+    margin: 0 0 6px 0;
   }
   .tagline {
-    margin: 0 0 12px 0;
-    color: #555;
-    font-size: 15px;
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 14px 0;
   }
   .contact {
-    font-size: 13px;
-    color: #444;
-    line-height: 1.8;
+    font-size: 12.5px;
+    color: var(--text-soft);
+    line-height: 1.85;
+    font-family: "JetBrains Mono", monospace;
   }
-  .contact a {
-    color: #1a1a1a;
-    text-decoration: none;
-    border-bottom: 1px dotted #999;
-    margin: 0 2px;
-  }
-  .contact a:hover { border-bottom-style: solid; color: #0048cc; }
-  .sep { color: #bbb; margin: 0 6px; }
+  .contact a { color: var(--text); border-bottom: 1px solid var(--line); padding-bottom: 1px; }
+  .contact a:hover { border-bottom-color: var(--text); opacity: 1; }
+  .sep { color: var(--muted); margin: 0 6px; }
 
   /* ── Sections ───────────────────────────────────────────── */
-  section {
-    margin-top: 28px;
-    page-break-inside: avoid;
+  section { margin-top: 32px; page-break-inside: avoid; }
+  .h2 {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: lowercase;
+    color: var(--text);
+    display: flex; align-items: center; gap: 12px;
+    margin: 0 0 16px 0;
+    letter-spacing: 0.5px;
   }
-  h2 {
-    margin: 0 0 14px 0;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #0048cc;
-  }
+  .h2 .slash { color: var(--muted); }
+  .h2::after { content: ""; flex: 1; border-bottom: 1px solid var(--line); }
+
+  /* ── Entries ────────────────────────────────────────────── */
+  .entry { margin-bottom: 16px; }
+  .entry:last-child { margin-bottom: 0; }
   h3 {
     margin: 0 0 4px 0;
     font-size: 15px;
     font-weight: 600;
+    color: var(--text);
   }
-  .where {
-    color: #555;
-    font-size: 13px;
-    margin-bottom: 6px;
-  }
-  .when {
+  h3 .when {
     float: right;
-    color: #777;
+    color: var(--muted);
     font-size: 12px;
     font-style: italic;
+    font-weight: 400;
+    font-family: "JetBrains Mono", monospace;
   }
-  .summary {
-    margin: 0 0 8px 0;
-    color: #333;
+  .where {
+    color: var(--text-soft);
+    font-size: 13px;
+    margin-bottom: 8px;
   }
+  .where a { color: var(--text); border-bottom: 1px solid var(--line); padding-bottom: 1px; }
+  .summary { color: var(--text-soft); margin: 0; }
+  .summary strong { color: var(--text); font-weight: 600; }
 
-  /* ── Lists ──────────────────────────────────────────────── */
-  ul {
-    margin: 8px 0 0 0;
-    padding-left: 18px;
-  }
+  /* ── Bullets ────────────────────────────────────────────── */
+  ul { margin: 6px 0 0; padding-left: 0; list-style: none; }
   li {
-    margin-bottom: 4px;
-    color: #2a2a2a;
+    position: relative;
+    padding-left: 18px;
+    margin-bottom: 6px;
+    color: var(--text-soft);
+    font-size: 13.5px;
   }
-  li strong { color: #0048cc; }
-
-  .entry {
-    margin-bottom: 18px;
+  li::before {
+    content: "▸";
+    position: absolute; left: 0; top: 0;
+    color: var(--text);
   }
-  .entry:last-child { margin-bottom: 0; }
+  li strong { color: var(--text); font-weight: 600; }
 
-  /* ── Skills layout ──────────────────────────────────────── */
+  /* ── Skills grid ────────────────────────────────────────── */
   .skills-grid {
     display: grid;
     grid-template-columns: 130px 1fr;
-    gap: 6px 16px;
-    font-size: 13px;
+    gap: 6px 24px;
+    font-size: 13.5px;
   }
-  .skills-grid .label {
-    color: #555;
-    font-weight: 600;
-    text-align: right;
+  .skill-label {
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding-top: 1px;
   }
-  .skills-grid .value { color: #1a1a1a; }
-
-  .langs {
-    font-size: 13px;
-  }
-  .langs strong { color: #0048cc; }
+  .skill-value { color: var(--text-soft); }
+  .skill-value strong { color: var(--text); font-weight: 600; }
 
   /* ── Print styles ───────────────────────────────────────── */
-  @page {
-    size: A4;
-    margin: 12mm 14mm;
-  }
+  @page { size: A4; margin: 10mm 12mm; }
   @media print {
-    body { background: white; font-size: 11pt; }
-    .page {
-      box-shadow: none;
-      max-width: none;
-      margin: 0;
-      padding: 0;
-      border-radius: 0;
-    }
-    h1 { font-size: 22pt; }
-    h2 { font-size: 10pt; }
-    h3 { font-size: 11pt; }
-    section { margin-top: 14pt; }
-    a { color: #1a1a1a; text-decoration: none; border-bottom: none; }
-    .contact a { border-bottom: none; }
+    .topbar { display: none; }
+    body { background: white; color: #1a1a1a; font-size: 10.5pt; }
+    main { padding: 0; max-width: none; }
+    header.cv-head { border-bottom: 2px solid #1a1a1a; }
+    header.cv-head h1 { color: #1a1a1a; font-size: 22pt; }
+    .tagline { color: #555; }
+    .contact { color: #333; }
+    .contact a { color: #1a1a1a; border-bottom: none; }
+    .h2 { color: #0048cc; }
+    .h2 .slash { color: #0048cc; }
+    .h2::after { border-bottom-color: #ccc; }
+    h3 { color: #1a1a1a; }
+    h3 .when { color: #555; }
+    .where, .where a { color: #444; border-bottom: none; }
+    .summary, li { color: #2a2a2a; }
+    li::before { color: #0048cc; }
+    .skill-label { color: #555; }
+    .skill-value { color: #1a1a1a; }
+    li strong, .skill-value strong, .summary strong { color: #1a1a1a; }
   }
 
   /* ── Responsive ─────────────────────────────────────────── */
   @media (max-width: 640px) {
-    .page { padding: 28px 22px; margin: 0; border-radius: 0; }
-    .when { float: none; display: block; margin-bottom: 4px; }
-    .skills-grid { grid-template-columns: 1fr; gap: 2px; }
-    .skills-grid .label { text-align: left; }
-    h1 { font-size: 24px; }
+    main { padding: 28px 22px 60px; }
+    .topbar .inner { padding: 0 22px; }
+    h3 .when { float: none; display: block; margin-bottom: 2px; }
+    .skills-grid { grid-template-columns: 1fr; gap: 2px 0; }
+    .skill-label { text-align: left; padding-top: 4px; }
+    header.cv-head h1 { font-size: 24px; }
   }
 </style>
 </head>
 <body>
-  <main class="page">
 
-    <header>
+  <div class="topbar">
+    <div class="inner">
+      <a href="index.html">← back to portfolio</a>
+      <span class="right">esra elareibi · cv</span>
+    </div>
+  </div>
+
+  <main>
+
+    <header class="cv-head">
       <h1>Esra Elareibi</h1>
       <p class="tagline">Computer Science student · Software engineer · Backend / mobile / full-stack</p>
       <div class="contact">
@@ -183,30 +224,30 @@
     </header>
 
     <section>
-      <h2>Summary</h2>
+      <h2 class="h2"><span class="slash">/</span> summary</h2>
       <p class="summary">
         Second-year Computer Science student at the University of Florence, currently shipping production code as an intern on a multi-tenant SaaS. Comfortable across <strong>backend</strong> (NestJS, Java/Spring Boot), <strong>web frontends</strong> (React, Next.js), and <strong>cross-platform mobile apps</strong> (React Native + Expo, iOS + Android). Strong fundamentals in REST APIs, JPA/Prisma, and relational database design.
       </p>
     </section>
 
     <section>
-      <h2>Experience</h2>
+      <h2 class="h2"><span class="slash">/</span> experience</h2>
       <div class="entry">
         <h3>Software Engineering Intern <span class="when">2026 – Present</span></h3>
-        <div class="where"><a href="https://chequo.com">Chequo</a> · Nilson LLC — multi-tenant SaaS POS for restaurants</div>
+        <div class="where"><a href="https://chequo.com">Chequo</a> — multi-tenant SaaS POS for restaurants</div>
         <ul>
           <li>Contributing to a multi-tenant cloud-native SaaS POS for European restaurants (TypeScript monorepo: <strong>NestJS</strong>, <strong>Next.js</strong>, <strong>React Native</strong>, <strong>Prisma</strong>, <strong>PostgreSQL</strong>).</li>
           <li>Shipped the staff-app side of the <em>"join tables"</em> feature end-to-end — REST endpoints, Prisma schema additions, shared TypeScript types, and the React Native UI on the floor-plan screen. Open as draft PR (24 commits, ~2,000 lines).</li>
           <li>Set up the staff-app <strong>iOS Simulator</strong> build pipeline (Expo prebuild + CocoaPods + native plugin patches) — the first iOS build on the project.</li>
-          <li>Resolved cross-feature <strong>merge conflicts</strong> during major upstream framework upgrades (React 18 → 19, Next.js 14 → 16, Expo SDK 52 → 54).</li>
+          <li>Resolved cross-feature <strong>merge conflicts</strong> from major upstream framework upgrades (React 18 → 19, Next.js 14 → 16, Expo SDK 52 → 54) in a multi-agent git-worktree workflow.</li>
           <li>Tested a new guest reservation widget against eight production scenarios; delivered a prioritized fix-list with concrete UI proposals to the lead engineer.</li>
-          <li>Learning modern software-engineering practices through <strong>AI-assisted development with Claude Code</strong> in a multi-agent git-worktree workflow.</li>
+          <li>Modern software-engineering practices through <strong>AI-assisted development with Claude Code</strong> in a multi-agent git-worktree workflow.</li>
         </ul>
       </div>
     </section>
 
     <section>
-      <h2>Education</h2>
+      <h2 class="h2"><span class="slash">/</span> education</h2>
       <div class="entry">
         <h3>University of Florence (UNIFI) <span class="when">2024 – 2027 (expected)</span></h3>
         <div class="where">Bachelor's in Computer Science</div>
@@ -218,11 +259,11 @@
     </section>
 
     <section>
-      <h2>Selected projects</h2>
+      <h2 class="h2"><span class="slash">/</span> selected projects</h2>
 
       <div class="entry">
         <h3>BookLink — Full-Stack Booking Platform <span class="when">in progress</span></h3>
-        <div class="where">Java · Spring Boot · MySQL · JavaScript · <a href="https://github.com/Esra-el/Booklink">github.com/Esra-el/Booklink</a></div>
+        <div class="where">Java · Spring Boot · MySQL · JavaScript · <a href="https://github.com/Esra-el/Booklink">github.com/Esra-el/Booklink</a> · Live at <a href="https://esra-el.github.io/booklink-site/">esra-el.github.io/booklink-site</a></div>
         <ul>
           <li>REST API backend in Spring Boot for a platform where service providers get a personal booking link and clients book sessions directly.</li>
           <li>JPA entities + repositories over a 3-table relational schema with one-to-many relations and FKs.</li>
@@ -255,7 +296,7 @@
         <h3>Algorithm Tree Project</h3>
         <div class="where">Java · <a href="https://github.com/Esra-el/algorithm-project">github.com/Esra-el/algorithm-project</a></div>
         <ul>
-          <li>Generic tree data structure with parent/child relations; DFS + BFS traversals; height and node-level computations.</li>
+          <li>Generic tree data structure with parent/child relations, DFS + BFS traversals, height + level computations.</li>
           <li>Built with strict OOP and recursion; thoroughly tested.</li>
         </ul>
       </div>
@@ -270,33 +311,36 @@
     </section>
 
     <section>
-      <h2>Technical skills</h2>
+      <h2 class="h2"><span class="slash">/</span> technical skills</h2>
       <div class="skills-grid">
-        <div class="label">Languages</div>
-        <div class="value">Java · TypeScript · JavaScript · SQL · HTML/CSS · RISC-V Assembly</div>
+        <div class="skill-label">languages</div>
+        <div class="skill-value"><strong>Java</strong> · <strong>TypeScript</strong> · <strong>JavaScript</strong> · <strong>SQL</strong> · HTML/CSS · RISC-V Assembly</div>
 
-        <div class="label">Frameworks</div>
-        <div class="value">Spring Boot (REST, JPA, JWT) · NestJS · Next.js · React · React Native + Expo</div>
+        <div class="skill-label">frameworks</div>
+        <div class="skill-value"><strong>Spring Boot</strong> (REST, JPA, JWT) · <strong>NestJS</strong> · <strong>Next.js</strong> · <strong>React</strong> · <strong>React Native</strong> + Expo</div>
 
-        <div class="label">Databases</div>
-        <div class="value">PostgreSQL · MySQL — relational design, normalization, queries</div>
+        <div class="skill-label">databases</div>
+        <div class="skill-value"><strong>PostgreSQL</strong> · <strong>MySQL</strong> — relational design, normalization, queries</div>
 
-        <div class="label">ORMs</div>
-        <div class="value">JPA / Hibernate · Prisma</div>
+        <div class="skill-label">orms</div>
+        <div class="skill-value">JPA / Hibernate · Prisma</div>
 
-        <div class="label">Tools</div>
-        <div class="value">Git (worktrees, pull requests, conflict resolution) · IntelliJ IDEA · VS Code · MySQL Workbench · pnpm · Claude Code (AI-assisted development)</div>
+        <div class="skill-label">tools</div>
+        <div class="skill-value">Git (worktrees, pull requests, conflict resolution) · IntelliJ IDEA · VS Code · MySQL Workbench · pnpm</div>
 
-        <div class="label">Testing</div>
-        <div class="value">JUnit · Jest</div>
+        <div class="skill-label">ai tools</div>
+        <div class="skill-value"><strong>Claude Code</strong> · <strong>ChatGPT</strong> · AI-assisted development as a daily workflow</div>
 
-        <div class="label">Concepts</div>
-        <div class="value">OOP · REST APIs · JWT auth · Server-Sent Events (SSE) · monorepo architecture · multi-tenant SaaS · relational database design · computer architecture</div>
+        <div class="skill-label">testing</div>
+        <div class="skill-value">JUnit · Jest</div>
+
+        <div class="skill-label">concepts</div>
+        <div class="skill-value">OOP · REST APIs · JWT auth · Server-Sent Events · monorepo · multi-tenant SaaS · relational design · computer architecture</div>
       </div>
     </section>
 
     <section>
-      <h2>Certifications</h2>
+      <h2 class="h2"><span class="slash">/</span> certifications</h2>
       <div class="entry">
         <h3>HTML &amp; CSS Workshop, 42 Firenze <span class="when">2026</span></h3>
         <div class="where">Hands-on Web Development Workshop</div>
@@ -308,8 +352,8 @@
     </section>
 
     <section>
-      <h2>Languages spoken</h2>
-      <p class="langs"><strong>English</strong> · <strong>Italian</strong> · <strong>Arabic</strong> — all fluent</p>
+      <h2 class="h2"><span class="slash">/</span> languages spoken</h2>
+      <p class="summary"><strong>English</strong> · <strong>Italian</strong> · <strong>Arabic</strong> — all fluent</p>
     </section>
 
   </main>

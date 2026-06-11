@@ -417,7 +417,7 @@
         <p>
           Computer Science student at the University of Florence and software-engineering intern at <strong>Chequo</strong>. I ship production code on a multi-tenant SaaS by day, and paint with oil at night. Occasionally both happen at the same time.
         </p>
-        <a href="mailto:esra.elareibi@yahoo.com" class="cta">✉&nbsp; Say hi!</a>
+        <a href="mailto:esra.elareibi@yahoo.com?subject=Hi%20Esra" class="cta">✉&nbsp; Say hi!</a>
       </div>
     </section>
 
@@ -698,7 +698,25 @@
       }
       tick();
     };
-    img.src = 'esra.jpg';
+    img.src = 'hero-source.jpg';
+  })();
+
+  // ── 3. "Say hi!" button: try mailto + copy email to clipboard ──
+  (function() {
+    const btns = document.querySelectorAll('a[href^="mailto:"]');
+    btns.forEach(btn => {
+      const email = btn.href.replace(/^mailto:/, '').split('?')[0];
+      const originalHTML = btn.innerHTML;
+      btn.addEventListener('click', async (e) => {
+        try {
+          await navigator.clipboard.writeText(email);
+          btn.innerHTML = '✓&nbsp; Email copied — ' + email;
+          setTimeout(() => { btn.innerHTML = originalHTML; }, 2400);
+        } catch (err) {
+          // clipboard not available — mailto: still fires
+        }
+      });
+    });
   })();
 
   // ── 2. Glitch text reveal on the hero heading ──────────────────

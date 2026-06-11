@@ -18,7 +18,7 @@
     --text:      #f0f0f0;
     --text-soft: #c4c4c4;
     --muted:     #7a7a7a;
-    --accent:    #7fd9a8;   /* mint-green — matches the shirt mood */
+    --accent:    #f5f5f5;   /* white — green is reserved for the dotted face only */
   }
   html { scroll-behavior: smooth; background: var(--bg); }
   body {
@@ -635,28 +635,31 @@
       off.width = SIZE;
       off.height = SIZE;
       const octx = off.getContext('2d');
-      // Center-cover the image into the square
+      // Cover-crop the image into the square, biasing toward the top for
+      // portrait shots (where the face usually lives in the upper third).
       const scale = Math.max(SIZE / img.width, SIZE / img.height);
       const dw = img.width * scale;
       const dh = img.height * scale;
       const dx = (SIZE - dw) / 2;
-      const dy = (SIZE - dh) / 2;
+      const isPortrait = img.height > img.width;
+      const yBias = isPortrait ? 0.08 : 0.5; // 0=top, .5=center
+      const dy = (SIZE - dh) * yBias;
       octx.drawImage(img, dx, dy, dw, dh);
       const pixels = octx.getImageData(0, 0, SIZE, SIZE).data;
 
       // Build a dot for each grid cell where the pixel is darker than the bg.
-      // Smaller step = more dots = denser portrait.
+      // Tighter threshold (160) so busy backgrounds don't bleed into dots.
       const STEP = 5;
+      const THRESHOLD = 165;
       const dots = [];
       for (let y = 0; y < SIZE; y += STEP) {
         for (let x = 0; x < SIZE; x += STEP) {
           const i = (y * SIZE + x) * 4;
           // luminance (BT.601-ish)
           const lum = pixels[i] * 0.299 + pixels[i+1] * 0.587 + pixels[i+2] * 0.114;
-          // bias toward darker regions (face/hair); skip the light background
-          if (lum > 195) continue;
+          if (lum > THRESHOLD) continue;
           // dot radius: darker = larger, clamped
-          const r = Math.max(0.6, Math.min(2.4, (210 - lum) / 60));
+          const r = Math.max(0.6, Math.min(2.4, (THRESHOLD + 15 - lum) / 60));
           dots.push({ bx: x, by: y, x: x, y: y, r });
         }
       }

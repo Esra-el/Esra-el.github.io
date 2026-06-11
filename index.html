@@ -676,13 +676,17 @@
       });
       canvas.addEventListener('mouseleave', () => { active = false; mx = -9999; my = -9999; });
 
-      // Pre-decide whether each dot is rendered as "+" or "−" — alternating
-      // grid pattern (Gazi-style), so neighboring symbols don't all match.
+      // Pre-assign each marker a symbol: dot · + · − — mixed pattern,
+      // deterministic by grid position so neighbours vary without jitter.
       for (let k = 0; k < dots.length; k++) {
         const d = dots[k];
         const cellX = Math.floor(d.bx / STEP);
         const cellY = Math.floor(d.by / STEP);
-        d.isPlus = ((cellX + cellY) % 2) === 0;
+        // hash-ish over the cell position → 0..6 → split into 3 buckets
+        const t = (cellX * 5 + cellY * 3 + (cellX ^ cellY)) % 7;
+        if      (t <= 2) d.symbol = 'dot';    // ~3/7  ≈ 43%
+        else if (t <= 4) d.symbol = 'plus';   // ~2/7  ≈ 29%
+        else             d.symbol = 'minus';  // ~2/7  ≈ 29%
       }
 
       function tick() {
@@ -706,21 +710,27 @@
 
           const drift = Math.hypot(d.x - d.bx, d.y - d.by);
           const opacity = Math.max(0.55, 0.95 - drift * 0.01);
-          ctx.strokeStyle = 'rgba(127, 217, 168, ' + opacity + ')';
-          ctx.lineWidth = 1.1;
-
-          // Render as a small "+" or "−" symbol (Gazi-style)
           const arm = 1.8 + drift * 0.03;
-          ctx.beginPath();
-          // Horizontal line — drawn for both + and −
-          ctx.moveTo(d.x - arm, d.y);
-          ctx.lineTo(d.x + arm, d.y);
-          // Vertical line — only for +
-          if (d.isPlus) {
-            ctx.moveTo(d.x, d.y - arm);
-            ctx.lineTo(d.x, d.y + arm);
+
+          if (d.symbol === 'dot') {
+            // Filled circle
+            ctx.fillStyle = 'rgba(127, 217, 168, ' + opacity + ')';
+            ctx.beginPath();
+            ctx.arc(d.x, d.y, 1.2 + drift * 0.025, 0, Math.PI * 2);
+            ctx.fill();
+          } else {
+            // + or − rendered as line strokes
+            ctx.strokeStyle = 'rgba(127, 217, 168, ' + opacity + ')';
+            ctx.lineWidth = 1.1;
+            ctx.beginPath();
+            ctx.moveTo(d.x - arm, d.y);
+            ctx.lineTo(d.x + arm, d.y);
+            if (d.symbol === 'plus') {
+              ctx.moveTo(d.x, d.y - arm);
+              ctx.lineTo(d.x, d.y + arm);
+            }
+            ctx.stroke();
           }
-          ctx.stroke();
         }
         requestAnimationFrame(tick);
       }

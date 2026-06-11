@@ -5,311 +5,547 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Esra Elareibi — Software Engineer</title>
 <meta name="description" content="Esra Elareibi — Computer Science student & software engineer, Florence. Backend, mobile, full-stack.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* ── Reset & base ───────────────────────────────────────── */
   *, *::before, *::after { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  :root {
+    --bg:        #0d1b2a;
+    --bg-soft:   #142133;
+    --line:      #1f3148;
+    --line-soft: #2a3d56;
+    --text:      #e8edf3;
+    --muted:     #8a99b3;
+    --accent:    #7fe6cb;
+    --accent-2:  #51d4b3;
+  }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Inter", "Helvetica Neue", Arial, sans-serif;
-    color: #1a1a1a;
-    line-height: 1.55;
-    background: #f8f7f3;
-    font-size: 14px;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.6;
+    font-size: 15px;
   }
+  a { color: var(--accent); text-decoration: none; transition: opacity .2s; }
+  a:hover { opacity: .8; }
+  .mono { font-family: "JetBrains Mono", ui-monospace, monospace; }
+  ::selection { background: var(--accent); color: var(--bg); }
 
-  /* ── Layout ─────────────────────────────────────────────── */
-  .page {
-    max-width: 820px;
-    margin: 32px auto;
-    padding: 48px 56px;
-    background: #ffffff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05),
-                0 8px 32px rgba(0, 0, 0, 0.04);
-    border-radius: 4px;
+  nav.top {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(10px);
+    background: rgba(13, 27, 42, 0.85);
+    border-bottom: 1px solid var(--line);
+    padding: 14px 0;
   }
+  nav.top .inner {
+    max-width: 1080px; margin: 0 auto; padding: 0 32px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px;
+  }
+  nav.top .brand { font-weight: 600; }
+  nav.top .links { display: flex; gap: 24px; }
+  nav.top .links a { color: var(--text); }
+  nav.top .links a:hover { color: var(--accent); opacity: 1; }
+  nav.top .socials { display: flex; gap: 14px; align-items: center; }
+  nav.top .socials a { color: var(--text); font-size: 14px; }
+  nav.top .socials a:hover { color: var(--accent); }
 
-  /* ── Header ─────────────────────────────────────────────── */
-  header {
-    border-bottom: 2px solid #1a1a1a;
-    padding-bottom: 18px;
-    margin-bottom: 28px;
+  main { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+  section { padding: 80px 0; border-bottom: 1px dashed var(--line-soft); }
+  section:last-child { border-bottom: none; }
+  .h2 {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 28px; font-weight: 500;
+    color: var(--text);
+    display: flex; align-items: center; gap: 16px;
+    margin: 0 0 40px 0;
   }
-  h1 {
-    margin: 0 0 6px 0;
-    font-size: 30px;
-    font-weight: 700;
+  .h2 .slash { color: var(--accent); }
+  .h2::after { content: ""; flex: 1; border-bottom: 1px dashed var(--line-soft); }
+
+  .hero {
+    padding: 100px 0 80px 0;
+    border-bottom: 1px dashed var(--line-soft);
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .avatar {
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1c3148 0%, #0d1b2a 100%);
+    border: 2px solid var(--line);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+  .avatar .pattern {
+    width: 220px; height: 220px;
+    background-image: radial-gradient(circle, var(--accent) 1.2px, transparent 1.5px);
+    background-size: 12px 12px;
+    opacity: .35;
+    border-radius: 50%;
+    -webkit-mask: radial-gradient(circle at center, #000 60%, transparent 70%);
+            mask: radial-gradient(circle at center, #000 60%, transparent 70%);
+  }
+  .hero-text h1 {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 44px; font-weight: 400;
+    margin: 0 0 20px 0;
     letter-spacing: -0.5px;
   }
-  .tagline {
-    margin: 0 0 12px 0;
-    color: #555;
+  .hero-text h1 .you { color: var(--accent); font-weight: 600; }
+  .hero-text p {
+    margin: 0 0 28px 0;
+    color: var(--muted);
     font-size: 15px;
+    line-height: 1.7;
+    max-width: 540px;
   }
-  .contact {
-    font-size: 13px;
-    color: #444;
-    line-height: 1.8;
+  .cta {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 22px;
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    color: var(--accent);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    transition: all .2s;
   }
-  .contact a {
-    color: #1a1a1a;
-    text-decoration: none;
-    border-bottom: 1px dotted #999;
-    margin: 0 2px;
-  }
-  .contact a:hover { border-bottom-style: solid; color: #0048cc; }
-  .sep { color: #bbb; margin: 0 6px; }
+  .cta:hover { background: var(--accent); color: var(--bg); opacity: 1; }
 
-  /* ── Sections ───────────────────────────────────────────── */
-  section {
-    margin-top: 28px;
-    page-break-inside: avoid;
-  }
-  h2 {
-    margin: 0 0 14px 0;
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #0048cc;
-  }
-  h3 {
-    margin: 0 0 4px 0;
-    font-size: 15px;
-    font-weight: 600;
-  }
-  .where {
-    color: #555;
-    font-size: 13px;
-    margin-bottom: 6px;
-  }
-  .when {
-    float: right;
-    color: #777;
-    font-size: 12px;
-    font-style: italic;
-  }
-  .summary {
-    margin: 0 0 8px 0;
-    color: #333;
-  }
-
-  /* ── Lists ──────────────────────────────────────────────── */
-  ul {
-    margin: 8px 0 0 0;
-    padding-left: 18px;
-  }
-  li {
-    margin-bottom: 4px;
-    color: #2a2a2a;
-  }
-  li strong { color: #0048cc; }
-
-  .entry {
-    margin-bottom: 18px;
-  }
-  .entry:last-child { margin-bottom: 0; }
-
-  /* ── Skills layout ──────────────────────────────────────── */
-  .skills-grid {
+  .about-grid {
     display: grid;
-    grid-template-columns: 130px 1fr;
-    gap: 6px 16px;
-    font-size: 13px;
+    grid-template-columns: 1fr 280px;
+    gap: 50px;
+    align-items: start;
   }
-  .skills-grid .label {
-    color: #555;
+  .about-text p { margin: 0 0 16px 0; color: var(--text); }
+  .about-text strong { color: var(--accent); font-weight: 600; }
+  .tech-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px 28px;
+    margin: 16px 0;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .tech-list span::before { content: "▸ "; color: var(--accent); }
+  .about-photo {
+    width: 280px; height: 320px;
+    border-radius: 12px;
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+  }
+  .about-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+  .exp-grid {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 40px;
+  }
+  .exp-tabs { display: flex; flex-direction: column; gap: 4px; }
+  .exp-tab {
+    padding: 10px 16px;
+    text-align: left;
+    background: none;
+    border: none;
+    border-left: 2px solid var(--line);
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .exp-tab.active { border-left-color: var(--accent); color: var(--accent); background: rgba(127, 230, 203, 0.05); }
+  .exp-tab:hover { color: var(--text); }
+  .exp-content h3 {
+    margin: 0 0 6px 0;
+    font-size: 19px;
     font-weight: 600;
-    text-align: right;
   }
-  .skills-grid .value { color: #1a1a1a; }
+  .exp-content h3 .at { color: var(--accent); }
+  .exp-content .when {
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    margin-bottom: 22px;
+  }
+  .exp-content ul { padding-left: 0; list-style: none; }
+  .exp-content li {
+    position: relative;
+    padding-left: 22px;
+    margin-bottom: 14px;
+    color: var(--text);
+  }
+  .exp-content li::before {
+    content: "▸";
+    position: absolute; left: 0; top: 0;
+    color: var(--accent);
+  }
 
-  .langs {
+  .featured {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  .featured-image {
+    width: 100%; height: 320px;
+    background: linear-gradient(135deg, #1f3148 0%, #142133 100%);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    border-bottom: 1px solid var(--line);
+  }
+  .featured-image img { width: 100%; height: 100%; object-fit: cover; }
+  .featured-body { padding: 24px 28px; }
+  .featured-body h3 { margin: 0 0 8px 0; font-size: 20px; font-weight: 600; }
+  .featured-body p { margin: 0 0 14px 0; color: var(--muted); }
+  .featured-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tag {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    padding: 4px 10px;
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+    color: var(--muted);
+  }
+  .featured-links { margin-top: 16px; display: flex; gap: 16px; }
+  .featured-links a { font-family: "JetBrains Mono", monospace; font-size: 13px; }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .card {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 22px;
+    transition: border-color .2s, transform .2s;
+    display: flex; flex-direction: column;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+  .card-folder { font-size: 22px; color: var(--accent); }
+  .card-links { display: flex; gap: 10px; font-size: 13px; }
+  .card-links a { color: var(--muted); }
+  .card h4 { margin: 0 0 8px 0; font-size: 16px; font-weight: 600; }
+  .card p { margin: 0 0 14px 0; color: var(--muted); font-size: 13px; flex: 1; }
+  .card-tech {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .skills {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 8px 24px;
+    font-size: 14px;
+  }
+  .skill-label {
+    color: var(--accent);
+    font-family: "JetBrains Mono", monospace;
     font-size: 13px;
   }
-  .langs strong { color: #0048cc; }
+  .skill-value { color: var(--muted); }
+  .skill-value strong { color: var(--text); font-weight: 500; }
 
-  /* ── Print styles ───────────────────────────────────────── */
-  @page {
-    size: A4;
-    margin: 12mm 14mm;
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
   }
-  @media print {
-    body { background: white; font-size: 11pt; }
-    .page {
-      box-shadow: none;
-      max-width: none;
-      margin: 0;
-      padding: 0;
-      border-radius: 0;
-    }
-    h1 { font-size: 22pt; }
-    h2 { font-size: 10pt; }
-    h3 { font-size: 11pt; }
-    section { margin-top: 14pt; }
-    a { color: #1a1a1a; text-decoration: none; border-bottom: none; }
-    .contact a { border-bottom: none; }
+  .contact-grid p { color: var(--muted); }
+  .contact-actions { display: flex; flex-direction: column; gap: 12px; }
+  .contact-actions a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    transition: border-color .2s;
+  }
+  .contact-actions a:hover { border-color: var(--accent); opacity: 1; }
+
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    padding: 30px 0;
+    border-top: 1px solid var(--line);
   }
 
-  /* ── Responsive ─────────────────────────────────────────── */
-  @media (max-width: 640px) {
-    .page { padding: 28px 22px; margin: 0; border-radius: 0; }
-    .when { float: none; display: block; margin-bottom: 4px; }
-    .skills-grid { grid-template-columns: 1fr; gap: 2px; }
-    .skills-grid .label { text-align: left; }
-    h1 { font-size: 24px; }
+  @media (max-width: 800px) {
+    nav.top .links { display: none; }
+    .hero { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+    .avatar { margin: 0 auto; }
+    .hero-text h1 { font-size: 32px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-photo { width: 100%; max-width: 280px; margin: 0 auto; }
+    .exp-grid { grid-template-columns: 1fr; }
+    .exp-tabs { flex-direction: row; overflow-x: auto; }
+    .exp-tab { border-left: none; border-bottom: 2px solid var(--line); white-space: nowrap; }
+    .exp-tab.active { border-left: none; border-bottom-color: var(--accent); }
+    .cards { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .skills { grid-template-columns: 1fr; gap: 4px; }
+    section { padding: 60px 0; }
+    main { padding: 0 20px; }
   }
 </style>
 </head>
 <body>
-  <main class="page">
 
-    <header>
-      <h1>Esra Elareibi</h1>
-      <p class="tagline">Computer Science student · Software engineer · Backend / mobile / full-stack</p>
-      <div class="contact">
-        Florence, Italy
-        <span class="sep">·</span>
-        <a href="tel:+393488453981">+39 348 845 3981</a>
-        <span class="sep">·</span>
-        <a href="mailto:esra.elareibi@yahoo.com">esra.elareibi@yahoo.com</a>
-        <br>
-        <a href="https://github.com/Esra-el">github.com/Esra-el</a>
-        <span class="sep">·</span>
-        <a href="https://linkedin.com/in/esra-elar-/">linkedin.com/in/esra-elar-</a>
+  <nav class="top">
+    <div class="inner">
+      <div class="brand mono">Esra Elareibi</div>
+      <div class="links mono">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
       </div>
-    </header>
+      <div class="socials">
+        <a href="mailto:esra.elareibi@yahoo.com" title="Email">✉</a>
+        <a href="https://github.com/Esra-el" title="GitHub">⌥</a>
+        <a href="https://linkedin.com/in/esra-elar-/" title="LinkedIn">in</a>
+      </div>
+    </div>
+  </nav>
 
-    <section>
-      <h2>Summary</h2>
-      <p class="summary">
-        Second-year Computer Science student at the University of Florence, currently shipping production code as an intern on a multi-tenant SaaS. Comfortable across <strong>backend</strong> (NestJS, Java/Spring Boot), <strong>web frontends</strong> (React, Next.js), and <strong>cross-platform mobile apps</strong> (React Native + Expo, iOS + Android). Strong fundamentals in REST APIs, JPA/Prisma, and relational database design.
-      </p>
-    </section>
+  <main>
 
-    <section>
-      <h2>Experience</h2>
-      <div class="entry">
-        <h3>Software Engineering Intern <span class="when">2026 – Present</span></h3>
-        <div class="where"><a href="https://chequo.com">Chequo</a> · Nilson LLC — multi-tenant SaaS POS for restaurants</div>
-        <ul>
-          <li>Contributing to a multi-tenant cloud-native SaaS POS for European restaurants (TypeScript monorepo: <strong>NestJS</strong>, <strong>Next.js</strong>, <strong>React Native</strong>, <strong>Prisma</strong>, <strong>PostgreSQL</strong>).</li>
-          <li>Shipped the staff-app side of the <em>"join tables"</em> feature end-to-end — REST endpoints, Prisma schema additions, shared TypeScript types, and the React Native UI on the floor-plan screen. Open as draft PR (24 commits, ~2,000 lines).</li>
-          <li>Set up the staff-app <strong>iOS Simulator</strong> build pipeline (Expo prebuild + CocoaPods + native plugin patches) — the first iOS build on the project.</li>
-          <li>Resolved cross-feature <strong>merge conflicts</strong> during major upstream framework upgrades (React 18 → 19, Next.js 14 → 16, Expo SDK 52 → 54).</li>
-          <li>Tested a new guest reservation widget against eight production scenarios; delivered a prioritized fix-list with concrete UI proposals to the lead engineer.</li>
-          <li>Learning modern software-engineering practices through <strong>AI-assisted development with Claude Code</strong> in a multi-agent git-worktree workflow.</li>
-        </ul>
+    <section class="hero" id="home">
+      <div class="avatar">
+        <!-- swap this <div class="pattern"></div> for <img src="esra.jpg" alt="Esra"> once you upload your photo -->
+        <div class="pattern"></div>
+      </div>
+      <div class="hero-text">
+        <h1>hi, <span class="you">esra</span> here.</h1>
+        <p>
+          Computer Science student at the University of Florence and software-engineering intern at <strong style="color:var(--accent)">Chequo</strong>, where I ship production code on a multi-tenant SaaS for European restaurants. I love working across the whole stack — backend, web, mobile — and I treat AI-assisted development as a daily force multiplier.
+        </p>
+        <a href="mailto:esra.elareibi@yahoo.com" class="cta">✉  Say hi!</a>
       </div>
     </section>
 
-    <section>
-      <h2>Education</h2>
-      <div class="entry">
-        <h3>University of Florence (UNIFI) <span class="when">2024 – 2027 (expected)</span></h3>
-        <div class="where">Bachelor's in Computer Science</div>
-      </div>
-      <div class="entry">
-        <h3>British Secondary School <span class="when">2017 – 2020</span></h3>
-        <div class="where">IGCSE, A-Levels</div>
-      </div>
-    </section>
-
-    <section>
-      <h2>Selected projects</h2>
-
-      <div class="entry">
-        <h3>BookLink — Full-Stack Booking Platform <span class="when">in progress</span></h3>
-        <div class="where">Java · Spring Boot · MySQL · JavaScript · <a href="https://github.com/Esra-el/Booklink">github.com/Esra-el/Booklink</a></div>
-        <ul>
-          <li>REST API backend in Spring Boot for a platform where service providers get a personal booking link and clients book sessions directly.</li>
-          <li>JPA entities + repositories over a 3-table relational schema with one-to-many relations and FKs.</li>
-          <li>Endpoints for provider profiles, slot management, and bookings, with transactional row-locking on slot booking to prevent double-booking.</li>
-          <li>Adding JWT authentication, email confirmation (JavaMailSender), and a responsive frontend.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <h3>Multi-Cipher Encryption Engine</h3>
-        <div class="where">RISC-V Assembly · <a href="https://github.com/Esra-el/cipher-assembly">github.com/Esra-el/cipher-assembly</a></div>
-        <ul>
-          <li>Five composable ciphers in raw RISC-V assembly (Caesar, keyed Vigenère-style, positional, complement, reversal) — built from scratch, no libraries.</li>
-          <li>Stack-based LIFO ordering to record applied ciphers and reverse them on decryption; each transform a subroutine following proper calling conventions.</li>
-          <li>Manual modular arithmetic, register management, memory addressing, and syscalls for I/O.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <h3>Progetto BDSI — Pharmacy Database</h3>
-        <div class="where">SQL · MySQL · <a href="https://github.com/Esra-el/pharmacy-database">github.com/Esra-el/pharmacy-database</a></div>
-        <ul>
-          <li>Relational database for inventory, sales, clients, prescriptions, distributors.</li>
-          <li>ER diagrams, logical schema, views, stored procedures, functions, and triggers.</li>
-          <li>Queries for inventory updates, chronic patient tracking, defected-lot management.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <h3>Algorithm Tree Project</h3>
-        <div class="where">Java · <a href="https://github.com/Esra-el/algorithm-project">github.com/Esra-el/algorithm-project</a></div>
-        <ul>
-          <li>Generic tree data structure with parent/child relations; DFS + BFS traversals; height and node-level computations.</li>
-          <li>Built with strict OOP and recursion; thoroughly tested.</li>
-        </ul>
-      </div>
-
-      <div class="entry">
-        <h3>Logistics Company Website <span class="when">client project</span></h3>
-        <div class="where">HTML · CSS · JavaScript · <a href="https://github.com/Esra-el/Logistics-Company-Website">github.com/Esra-el/Logistics-Company-Website</a> · Live at elareibi.com</div>
-        <ul>
-          <li>Designed and built a responsive marketing website for a logistics company — clear navigation, service pages, mobile-friendly layout, modern styling.</li>
-        </ul>
+    <section id="about">
+      <h2 class="h2"><span class="slash">/</span> about me</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a second-year Computer Science student at the University of Florence (<strong>UNIFI</strong>), currently contributing as a software engineering intern at <strong>Chequo</strong> — a cloud-native SaaS POS for European restaurants.
+          </p>
+          <p>
+            I love building end-to-end: from a Prisma schema and REST endpoint, through React Native screens on a tablet, to the merge conflict resolution that brings someone else's work into mine. My background is broad on purpose — I've shipped Java, TypeScript, SQL, and even raw RISC-V assembly.
+          </p>
+          <p>Here are some technologies I have been working with:</p>
+          <div class="tech-list">
+            <span>TypeScript</span><span>Java</span>
+            <span>NestJS</span><span>Spring Boot</span>
+            <span>React Native</span><span>Next.js</span>
+            <span>Prisma</span><span>PostgreSQL</span>
+            <span>JPA / Hibernate</span><span>MySQL</span>
+          </div>
+          <p>
+            In my free time, I teach English, sketch logos and small UI designs, and explore the parts of computer science I don't get in class — recently it's been AI tooling and a deeper dive into low-level architecture.
+          </p>
+        </div>
+        <div class="about-photo">
+          <!-- swap "your photo here" for <img src="esra-portrait.jpg" alt="Esra portrait"> -->
+          your photo here
+        </div>
       </div>
     </section>
 
-    <section>
-      <h2>Technical skills</h2>
-      <div class="skills-grid">
-        <div class="label">Languages</div>
-        <div class="value">Java · TypeScript · JavaScript · SQL · HTML/CSS · RISC-V Assembly</div>
+    <section id="experience">
+      <h2 class="h2"><span class="slash">/</span> experience</h2>
+      <div class="exp-grid">
+        <div class="exp-tabs">
+          <button class="exp-tab active mono" data-tab="chequo">Chequo</button>
+          <button class="exp-tab mono" data-tab="britishi">British Institute</button>
+        </div>
 
-        <div class="label">Frameworks</div>
-        <div class="value">Spring Boot (REST, JPA, JWT) · NestJS · Next.js · React · React Native + Expo</div>
+        <div class="exp-content" id="exp-chequo">
+          <h3>Software Engineering Intern <span class="at">@ Chequo · Nilson LLC</span></h3>
+          <div class="when mono">2026 — PRESENT</div>
+          <ul>
+            <li>Shipped the staff-app side of the <em>"join tables"</em> feature end-to-end — REST endpoints, Prisma schema additions, shared TypeScript types, and the React Native UI on the floor-plan screen. Open as a draft PR: 24 commits, ~2,000 lines.</li>
+            <li>Set up the staff-app iOS Simulator build pipeline (Expo prebuild + CocoaPods + native plugin patches) — the first iOS build on the project.</li>
+            <li>Resolved cross-feature merge conflicts during major upstream upgrades (React 18 → 19, Next.js 14 → 16, Expo SDK 52 → 54) inside a multi-agent git-worktree workflow.</li>
+            <li>Tested a new guest reservation widget against eight production scenarios and delivered a prioritized fix-list to the lead engineer.</li>
+          </ul>
+        </div>
 
-        <div class="label">Databases</div>
-        <div class="value">PostgreSQL · MySQL — relational design, normalization, queries</div>
-
-        <div class="label">ORMs</div>
-        <div class="value">JPA / Hibernate · Prisma</div>
-
-        <div class="label">Tools</div>
-        <div class="value">Git (worktrees, pull requests, conflict resolution) · IntelliJ IDEA · VS Code · MySQL Workbench · pnpm · Claude Code (AI-assisted development)</div>
-
-        <div class="label">Testing</div>
-        <div class="value">JUnit · Jest</div>
-
-        <div class="label">Concepts</div>
-        <div class="value">OOP · REST APIs · JWT auth · Server-Sent Events (SSE) · monorepo architecture · multi-tenant SaaS · relational database design · computer architecture</div>
+        <div class="exp-content" id="exp-britishi" style="display:none">
+          <h3>English Teacher <span class="at">@ British Institute</span></h3>
+          <div class="when mono">2022 — PRESENT</div>
+          <ul>
+            <li>Teach English to students of varying ages and skill levels.</li>
+            <li>Plan and deliver lessons across reading, writing, speaking, and listening.</li>
+            <li>Provide individual support and track student progress over time.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
-    <section>
-      <h2>Certifications</h2>
-      <div class="entry">
-        <h3>HTML &amp; CSS Workshop, 42 Firenze <span class="when">2026</span></h3>
-        <div class="where">Hands-on Web Development Workshop</div>
+    <section id="projects">
+      <h2 class="h2"><span class="slash">/</span> projects</h2>
+
+      <div class="featured">
+        <div class="featured-image">
+          <!-- swap with <img src="screenshots/booklink-1.png" alt="BookLink screenshot"> -->
+          BookLink screenshot goes here
+        </div>
+        <div class="featured-body">
+          <h3>BookLink — One link. Infinite bookings.</h3>
+          <p>
+            A full-stack booking platform where service providers get a personal booking link and clients book sessions directly. REST API in Spring Boot over a 3-table relational schema with transactional row-locking on slot booking. Frontend in vanilla HTML/CSS/JS, deployed at <a href="https://esra-el.github.io/booklink-site/">esra-el.github.io/booklink-site/</a>.
+          </p>
+          <div class="featured-tags">
+            <span class="tag">Java</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">JPA</span>
+            <span class="tag">MySQL</span>
+            <span class="tag">JWT</span>
+            <span class="tag">JavaScript</span>
+          </div>
+          <div class="featured-links">
+            <a href="https://esra-el.github.io/booklink-site/">Live →</a>
+            <a href="https://github.com/Esra-el/Booklink">Code →</a>
+          </div>
+        </div>
       </div>
-      <div class="entry">
-        <h3>TEFL Certificate <span class="when">2021</span></h3>
-        <div class="where">Teaching English as a Foreign Language</div>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-top">
+            <span class="card-folder">📁</span>
+            <span class="card-links"><a href="https://github.com/Esra-el/pharmacy-database">⌥</a></span>
+          </div>
+          <h4>Pharmacy Database</h4>
+          <p>Relational database for inventory, sales, clients, prescriptions, distributors. ER diagrams, logical schema, views, stored procedures, functions, and triggers.</p>
+          <div class="card-tech">SQL · MySQL</div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <span class="card-folder">📁</span>
+            <span class="card-links"><a href="https://github.com/Esra-el/cipher-assembly">⌥</a></span>
+          </div>
+          <h4>Multi-Cipher Encryption Engine</h4>
+          <p>Five composable ciphers in raw RISC-V assembly from scratch. Stack-based LIFO ordering to reverse them on decryption. Manual modular arithmetic and register management.</p>
+          <div class="card-tech">RISC-V Assembly</div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <span class="card-folder">📁</span>
+            <span class="card-links"><a href="https://github.com/Esra-el/algorithm-project">⌥</a></span>
+          </div>
+          <h4>Algorithm Tree</h4>
+          <p>Generic tree data structure in Java with parent/child relationships, DFS + BFS traversals, height + level computations. Strict OOP and recursion.</p>
+          <div class="card-tech">Java</div>
+        </div>
+
+        <div class="card">
+          <div class="card-top">
+            <span class="card-folder">📁</span>
+            <span class="card-links"><a href="https://github.com/Esra-el/Logistics-Company-Website">⌥</a></span>
+          </div>
+          <h4>Logistics Company Website</h4>
+          <p>Designed and built a responsive marketing site for a logistics company — clear navigation, service pages, mobile-friendly layout, modern styling. Live at elareibi.com.</p>
+          <div class="card-tech">HTML · CSS · JavaScript</div>
+        </div>
+
       </div>
     </section>
 
-    <section>
-      <h2>Languages spoken</h2>
-      <p class="langs"><strong>English</strong> · <strong>Italian</strong> · <strong>Arabic</strong> — all fluent</p>
+    <section id="skills">
+      <h2 class="h2"><span class="slash">/</span> skills</h2>
+      <div class="skills">
+        <div class="skill-label">languages</div>
+        <div class="skill-value"><strong>Java</strong> · <strong>TypeScript</strong> · <strong>JavaScript</strong> · <strong>SQL</strong> · HTML/CSS · RISC-V Assembly</div>
+
+        <div class="skill-label">frameworks</div>
+        <div class="skill-value"><strong>Spring Boot</strong> (REST, JPA, JWT) · <strong>NestJS</strong> · <strong>Next.js</strong> · <strong>React</strong> · <strong>React Native</strong> + Expo</div>
+
+        <div class="skill-label">databases</div>
+        <div class="skill-value"><strong>PostgreSQL</strong> · <strong>MySQL</strong> — relational design, normalization, queries</div>
+
+        <div class="skill-label">orms</div>
+        <div class="skill-value">JPA / Hibernate · Prisma</div>
+
+        <div class="skill-label">tools</div>
+        <div class="skill-value">Git (worktrees, pull requests, conflict resolution) · IntelliJ IDEA · VS Code · MySQL Workbench · pnpm · <strong>Claude Code</strong></div>
+
+        <div class="skill-label">testing</div>
+        <div class="skill-value">JUnit · Jest</div>
+
+        <div class="skill-label">concepts</div>
+        <div class="skill-value">OOP · REST APIs · JWT · Server-Sent Events · monorepo · multi-tenant SaaS · relational design · computer architecture</div>
+
+        <div class="skill-label">languages I speak</div>
+        <div class="skill-value"><strong>English</strong> · <strong>Italian</strong> · <strong>Arabic</strong> — all fluent</div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="h2"><span class="slash">/</span> contact</h2>
+      <div class="contact-grid">
+        <div>
+          <p>I'm looking for a summer software-engineering internship in backend, mobile, or full-stack. If you're hiring, want to chat about code, or have an idea worth building — say hi.</p>
+          <p style="color:var(--muted);font-size:13px;margin-top:20px">Florence, Italy</p>
+        </div>
+        <div class="contact-actions">
+          <a href="mailto:esra.elareibi@yahoo.com">✉  esra.elareibi@yahoo.com</a>
+          <a href="https://github.com/Esra-el">⌥  github.com/Esra-el</a>
+          <a href="https://linkedin.com/in/esra-elar-/">in  linkedin.com/in/esra-elar-</a>
+        </div>
+      </div>
     </section>
 
   </main>
+
+  <footer>
+    Built with care · &copy; 2026 Esra Elareibi
+  </footer>
+
+<script>
+  document.querySelectorAll('.exp-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      document.querySelectorAll('.exp-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.exp-content').forEach(c => c.style.display = 'none');
+      const next = document.getElementById('exp-' + target);
+      if (next) next.style.display = 'block';
+    });
+  });
+</script>
+
 </body>
 </html>

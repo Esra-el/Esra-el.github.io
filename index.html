@@ -108,20 +108,24 @@
     color: var(--accent);
     font-weight: 600;
   }
-  /* hand-drawn / pencil-stroke per-letter reveal */
+  /* Style 1: Typewriter — letters appear one by one, cursor blinks */
   .hero-text h1 .char {
     display: inline-block;
     opacity: 0;
-    transform: translateY(0.18em) rotate(var(--r, 0deg));
-    animation: drawIn 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-delay: calc(var(--i, 0) * 0.06s + 0.25s);
-    will-change: transform, opacity;
+    animation: typeIn 0.01s linear forwards;
+    animation-delay: calc(var(--i, 0) * 0.075s + 0.2s);
   }
-  @keyframes drawIn {
-    to {
-      opacity: 1;
-      transform: translateY(0) rotate(0deg);
-    }
+  @keyframes typeIn { to { opacity: 1; } }
+  .hero-text h1 .cursor {
+    display: inline-block;
+    margin-left: 2px;
+    color: var(--accent);
+    font-weight: 200;
+    animation: blink 0.85s steps(1, end) infinite;
+  }
+  @keyframes blink {
+    0%, 50%   { opacity: 1; }
+    51%, 100% { opacity: 0; }
   }
   .hero-text p {
     margin: 0 0 32px 0;
@@ -777,11 +781,11 @@
       if (part.cls === 'space') { html += ' '; return; }
       let inner = '';
       for (const ch of part.text) {
-        const r = (Math.random() - 0.5) * 5; // ±2.5deg wobble
-        inner += '<span class="char" style="--i:' + (idx++) + ';--r:' + r.toFixed(1) + 'deg">' + ch + '</span>';
+        inner += '<span class="char" style="--i:' + (idx++) + '">' + ch + '</span>';
       }
       html += part.cls ? '<span class="' + part.cls + '">' + inner + '</span>' : inner;
     });
+    html += '<span class="cursor">|</span>';
     h1.innerHTML = html;
 
     // Re-trigger the draw-in animation on hover (so it can be re-watched).

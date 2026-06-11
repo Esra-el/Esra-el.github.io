@@ -638,8 +638,6 @@
       off.width = SIZE;
       off.height = SIZE;
       const octx = off.getContext('2d');
-      // Cover-crop the image into the square, biasing toward the top for
-      // portrait shots (where the face usually lives in the upper third).
       const scale = Math.max(SIZE / img.width, SIZE / img.height);
       const dw = img.width * scale;
       const dh = img.height * scale;
@@ -650,93 +648,80 @@
       octx.drawImage(img, dx, dy, dw, dh);
       const pixels = octx.getImageData(0, 0, SIZE, SIZE).data;
 
-      // Build a dot for each grid cell where the pixel is darker than the bg.
-      // Tighter threshold (160) so busy backgrounds don't bleed into dots.
-      const STEP = 5;
-      const THRESHOLD = 165;
-      const dots = [];
-      for (let y = 0; y < SIZE; y += STEP) {
-        for (let x = 0; x < SIZE; x += STEP) {
-          const i = (y * SIZE + x) * 4;
-          // luminance (BT.601-ish)
-          const lum = pixels[i] * 0.299 + pixels[i+1] * 0.587 + pixels[i+2] * 0.114;
-          if (lum > THRESHOLD) continue;
-          // dot radius: darker = larger, clamped
-          const r = Math.max(0.6, Math.min(2.4, (THRESHOLD + 15 - lum) / 60));
-          dots.push({ bx: x, by: y, x: x, y: y, r });
+      // Sample luminance helper
+      function lumAt(x, y) {
+        if (x < 0 || x >= SIZE || y < 0 || y >= SIZE) return 255;
+        const i = (y * SIZE + x) * 4;
+        return pixels[i] * 0.299 + pixels[i+1] * 0.587 + pixels[i+2] * 0.114;
+      }
+
+      // Build pencil strokes at edges (gradient-following contour strokes).
+      // For each grid cell with a strong brightness gradient, draw a short
+      // stroke PERPENDICULAR to the gradient — i.e., along the contour line.
+      const STEP = 3;
+      const EDGE_THRESHOLD = 22;
+      const strokes = [];
+      for (let y = STEP; y < SIZE - STEP; y += STEP) {
+        for (let x = STEP; x < SIZE - STEP; x += STEP) {
+          // Simple horizontal + vertical brightness gradient (cheap Sobel)
+          const gx = lumAt(x + 1, y) - lumAt(x - 1, y);
+          const gy = lumAt(x, y + 1) - lumAt(x, y - 1);
+          const mag = Math.sqrt(gx * gx + gy * gy);
+          if (mag < EDGE_THRESHOLD) continue;
+
+          // Stroke direction = perpendicular to gradient = along the contour
+          const angle = Math.atan2(gy, gx) + Math.PI / 2;
+          const length = 2.5 + Math.min(mag / 28, 3.5);
+          // Pre-compute hand-drawn jitter so it doesn't shake every frame
+          const jx = (Math.random() - 0.5) * 0.5;
+          const jy = (Math.random() - 0.5) * 0.5;
+          strokes.push({ x, y, angle, length, mag, jx, jy });
         }
       }
 
-      let mx = -9999, my = -9999, active = false;
-      canvas.addEventListener('mousemove', (e) => {
-        const rect = canvas.getBoundingClientRect();
-        mx = (e.clientX - rect.left);
-        my = (e.clientY - rect.top);
-        active = true;
-      });
-      canvas.addEventListener('mouseleave', () => { active = false; mx = -9999; my = -9999; });
+      // Shuffle so the pencil reveal feels organic, not scanline-by-scanline.
+      for (let i = strokes.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const t = strokes[i]; strokes[i] = strokes[j]; strokes[j] = t;
+      }
 
-      // Pre-assign each marker a symbol: dot · + · − — mixed pattern,
-      // deterministic by grid position so neighbours vary without jitter.
-      for (let k = 0; k < dots.length; k++) {
-        const d = dots[k];
-        const cellX = Math.floor(d.bx / STEP);
-        const cellY = Math.floor(d.by / STEP);
-        // hash-ish over the cell position → 0..6 → split into 3 buckets
-        const t = (cellX * 5 + cellY * 3 + (cellX ^ cellY)) % 7;
-        if      (t <= 2) d.symbol = 'dot';    // ~3/7  ≈ 43%
-        else if (t <= 4) d.symbol = 'plus';   // ~2/7  ≈ 29%
-        else             d.symbol = 'minus';  // ~2/7  ≈ 29%
+      // ── Animate the drawing on load ──
+      const FRAMES_TO_DRAW = 110; // ~1.8s @ 60fps
+      let frame = 0;
+
+      function drawSketch(progress) {
+        ctx.clearRect(0, 0, SIZE, SIZE);
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = 'rgba(240, 240, 240, 0.7)';
+        ctx.lineWidth = 0.85;
+        const count = Math.floor(strokes.length * progress);
+        for (let i = 0; i < count; i++) {
+          const s = strokes[i];
+          const dxs = Math.cos(s.angle) * s.length / 2;
+          const dys = Math.sin(s.angle) * s.length / 2;
+          ctx.beginPath();
+          ctx.moveTo(s.x - dxs + s.jx, s.y - dys + s.jy);
+          ctx.lineTo(s.x + dxs + s.jx, s.y + dys + s.jy);
+          ctx.stroke();
+        }
       }
 
       function tick() {
-        ctx.clearRect(0, 0, SIZE, SIZE);
-        ctx.lineCap = 'round';
-        for (let k = 0; k < dots.length; k++) {
-          const d = dots[k];
-          let tx = d.bx, ty = d.by;
-          if (active) {
-            const dx2 = mx - d.bx;
-            const dy2 = my - d.by;
-            const dist = Math.sqrt(dx2 * dx2 + dy2 * dy2);
-            const pull = Math.max(0, 1 - dist / 90) * 16;
-            if (pull > 0) {
-              tx = d.bx + (dx2 / dist) * pull;
-              ty = d.by + (dy2 / dist) * pull;
-            }
-          }
-          d.x += (tx - d.x) * 0.16;
-          d.y += (ty - d.y) * 0.16;
-
-          const drift = Math.hypot(d.x - d.bx, d.y - d.by);
-          const opacity = Math.max(0.55, 0.95 - drift * 0.01);
-          const arm = 1.8 + drift * 0.03;
-
-          if (d.symbol === 'dot') {
-            // Filled circle
-            ctx.fillStyle = 'rgba(127, 217, 168, ' + opacity + ')';
-            ctx.beginPath();
-            ctx.arc(d.x, d.y, 1.2 + drift * 0.025, 0, Math.PI * 2);
-            ctx.fill();
-          } else {
-            // + or − rendered as line strokes
-            ctx.strokeStyle = 'rgba(127, 217, 168, ' + opacity + ')';
-            ctx.lineWidth = 1.1;
-            ctx.beginPath();
-            ctx.moveTo(d.x - arm, d.y);
-            ctx.lineTo(d.x + arm, d.y);
-            if (d.symbol === 'plus') {
-              ctx.moveTo(d.x, d.y - arm);
-              ctx.lineTo(d.x, d.y + arm);
-            }
-            ctx.stroke();
-          }
+        const progress = Math.min(1, frame / FRAMES_TO_DRAW);
+        // ease-out for a natural pencil tempo
+        const eased = 1 - Math.pow(1 - progress, 2);
+        drawSketch(eased);
+        if (frame <= FRAMES_TO_DRAW) {
+          frame++;
+          requestAnimationFrame(tick);
         }
-        requestAnimationFrame(tick);
       }
       tick();
+
+      // Re-draw the sketch on click — like flipping the page and re-doing it
+      canvas.addEventListener('click', () => { frame = 0; tick(); });
     };
-    img.src = 'hero-source.jpg?v=4';
+    img.src = 'hero-source.jpg?v=5';
   })();
 
   // ── 3. "Say hi!" button: try mailto + copy email to clipboard ──

@@ -262,8 +262,8 @@
         <div class="where">Bachelor's in Computer Science — coursework: databases, algorithms and data structures, computer architecture (RISC-V)</div>
       </div>
       <div class="entry">
-        <h3>42 Firenze <span class="when">from Nov 2026</span></h3>
-        <div class="where">Software Engineering (peer-to-peer, project-based, self-paced) — completed the <strong>Piscine</strong>, 42's intensive month-long C programming selection (all code hand-written), and was admitted to the core curriculum</div>
+        <h3>42 Firenze <span class="when">from 23 Nov 2026</span></h3>
+        <div class="where">Software Engineering (peer-to-peer, project-based, self-paced) — completed the <strong>Piscine</strong>, 42's intensive month-long C programming selection (all code hand-written), and enrolled in the core curriculum</div>
       </div>
       <div class="entry">
         <h3>British Secondary School <span class="when">2017 – 2020</span></h3>
@@ -273,6 +273,16 @@
 
     <section>
       <h2 class="h2"><span class="slash">/</span> selected projects</h2>
+
+      <div class="entry">
+        <h3>Client–Server Booking System</h3>
+        <div class="where">C · POSIX sockets · <a href="https://github.com/Esra-el/booking-system-">github.com/Esra-el/booking-system-</a></div>
+        <ul>
+          <li>Concurrent TCP booking server hand-written in C — a process per client via <strong>fork()</strong>, custom binary request/response protocol over POSIX sockets with full send/recv loops for partial reads and writes.</li>
+          <li>Role-based auth (user/admin) enforced server-side; admins approve or reject bookings and list pending bookings that overlap approved ones.</li>
+          <li>File-backed persistence with lock-file mutual exclusion (O_CREAT | O_EXCL) and interval-overlap conflict detection to prevent double-booking.</li>
+        </ul>
+      </div>
 
       <div class="entry">
         <h3>BookLink — Full-Stack Booking Platform <span class="when">in progress</span></h3>
